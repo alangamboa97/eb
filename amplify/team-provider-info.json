@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ebase-dev-175126-authRole",
+      "UnauthRoleArn": "arn:aws:iam::387678068467:role/amplify-ebase-dev-175126-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::387678068467:role/amplify-ebase-dev-175126-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-ebase-dev-175126-deployment",
+      "UnauthRoleName": "amplify-ebase-dev-175126-unauthRole",
+      "StackName": "amplify-ebase-dev-175126",
+      "StackId": "arn:aws:cloudformation:us-east-1:387678068467:stack/amplify-ebase-dev-175126/d1ca06d0-b7c2-11ed-b15b-12027c3bee8d",
+      "AmplifyAppId": "dj0gs5937lsru"
+    },
+    "categories": {
+      "auth": {
+        "ebase35f92a6b": {}
+      }
+    }
+  }
+}
