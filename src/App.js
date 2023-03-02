@@ -1,7 +1,8 @@
 import React from 'react';
 import { Amplify } from 'aws-amplify';
 import config from './aws-exports'; 
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import { Authenticator } from '@aws-amplify/ui-react';
 import './App.css';
 import '@aws-amplify/ui-react/styles.css';
 import { I18n } from 'aws-amplify';
@@ -25,13 +26,14 @@ I18n.putVocabularies(dict);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        Holi
-      
-        
-      </header>
-    </div>
+    <Authenticator>
+    {({ signOut, user }) => (
+      <main>
+        <h1>Hello {user.username}</h1>
+        <button onClick={signOut}>Sign out</button>
+      </main>
+    )}
+  </Authenticator>
   );
 }
 
