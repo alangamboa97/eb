@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "paths": {
+    "/conductores": {
+      "name": "/conductores",
+      "lambdaFunction": "conductoresfunction",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}

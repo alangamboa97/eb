@@ -9,11 +9,24 @@
       "UnauthRoleName": "amplify-ebase-dev-175126-unauthRole",
       "StackName": "amplify-ebase-dev-175126",
       "StackId": "arn:aws:cloudformation:us-east-1:387678068467:stack/amplify-ebase-dev-175126/d1ca06d0-b7c2-11ed-b15b-12027c3bee8d",
-      "AmplifyAppId": "dj0gs5937lsru"
+      "AmplifyAppId": "dj0gs5937lsru",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-ebase-dev-175126-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
         "ebase35f92a6b": {}
+      },
+      "function": {
+        "conductoresfunction": {
+          "deploymentBucketName": "amplify-ebase-dev-175126-deployment",
+          "s3Key": "amplify-builds/conductoresfunction-4f6e792f55675a4c514e-build.zip"
+        }
+      },
+      "storage": {
+        "conductoresdb": {}
+      },
+      "api": {
+        "conductoresapi": {}
       }
     }
   }

@@ -1,10 +1,20 @@
-import React from 'react';
-import { Amplify } from 'aws-amplify';
+import React, {useEffect, useState} from 'react';
+import { Amplify,API} from 'aws-amplify';
 import config from './aws-exports'; 
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import { Authenticator } from '@aws-amplify/ui-react';
+import { Authenticator} from '@aws-amplify/ui-react';
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { RequireAuth } from './RequireAuth';
 import './App.css';
+import Home from './Home';
+import Conductor from './Conductor';
+import Incidencia from './Incidencia';
+import Ubicacion from './Ubicacion';
+import { Layout } from './Layout';
+import { Login } from './Login';
 import '@aws-amplify/ui-react/styles.css';
+
+
 import { I18n } from 'aws-amplify';
 Amplify.configure(config);
 
@@ -24,17 +34,48 @@ const dict = {
 
 I18n.putVocabularies(dict);
 
-function App() {
+
+ export function MyRoutes(){
   return (
-    <Authenticator>
-    {({ signOut, user }) => (
-      <main>
-        <h1>Hello {user.username}</h1>
-        <button onClick={signOut}>Sign out</button>
-      </main>
-    )}
-  </Authenticator>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route
+            path="/conductor"
+            element={
+              <RequireAuth>
+                <Conductor />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/incidencia"
+            element={
+              <RequireAuth>
+                <Incidencia />
+              </RequireAuth>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
+
 }
 
-export default withAuthenticator(App);
+
+
+
+  function App() {
+    return (
+      <Authenticator.Provider>
+        <MyRoutes />
+      </Authenticator.Provider>
+    );
+  }
+  
+export default App;
+
+
