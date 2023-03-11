@@ -16,17 +16,8 @@
       "auth": {
         "ebase35f92a6b": {}
       },
-      "function": {
-        "conductoresfunction": {
-          "deploymentBucketName": "amplify-ebase-dev-175126-deployment",
-          "s3Key": "amplify-builds/conductoresfunction-4f6e792f55675a4c514e-build.zip"
-        }
-      },
-      "storage": {
-        "conductoresdb": {}
-      },
       "api": {
-        "conductoresapi": {}
+        "ebase": {}
       }
     }
   }

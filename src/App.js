@@ -42,6 +42,14 @@ I18n.putVocabularies(dict);
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route
+            path="/Home"
+            element={
+              <RequireAuth>
+                <Home />
+              </RequireAuth>
+            }
+          />
+          <Route
             path="/conductor"
             element={
               <RequireAuth>
@@ -54,6 +62,15 @@ I18n.putVocabularies(dict);
             element={
               <RequireAuth>
                 <Incidencia />
+              </RequireAuth>
+            }
+          />
+
+        <Route
+            path="/ubicacion"
+            element={
+              <RequireAuth>
+                <Ubicacion />
               </RequireAuth>
             }
           />
