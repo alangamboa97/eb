@@ -11,6 +11,8 @@ type Conductor @model @auth(rules: [{ allow: private, operations: [create, read,
   
 }
 
+
+
 type Incidencia @model @auth(rules: [{ allow: private, operations: [create, read, update, delete] }]){
   id: ID
   title: String
@@ -19,6 +21,7 @@ type Incidencia @model @auth(rules: [{ allow: private, operations: [create, read
   detalles: Detalles @hasOne
   fecha_hora: String
 }
+
 
 type Detalles @model @auth(rules: [{ allow: private, operations: [create, read, update, delete] }]){
   id: ID
