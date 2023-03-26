@@ -1,6 +1,7 @@
 import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuthenticator, Button, Heading, View } from '@aws-amplify/ui-react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 export function Layout() {
   const { route, signOut } = useAuthenticator((context) => [
@@ -16,7 +17,7 @@ export function Layout() {
   return (
     <>
       <nav>
-        <Button onClick={() => navigate('/')}>Home</Button>
+        <NavLink onClick={() => navigate('/')}>Home</NavLink>
         <Button onClick={() => navigate('/conductor')}>
           Conductor
         </Button>
