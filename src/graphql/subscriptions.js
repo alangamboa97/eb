@@ -12,7 +12,6 @@ export const onCreateConductor = /* GraphQL */ `
       incidencias {
         items {
           id
-          title
           estado
           fecha_hora
           createdAt
@@ -39,7 +38,6 @@ export const onUpdateConductor = /* GraphQL */ `
       incidencias {
         items {
           id
-          title
           estado
           fecha_hora
           createdAt
@@ -66,7 +64,6 @@ export const onDeleteConductor = /* GraphQL */ `
       incidencias {
         items {
           id
-          title
           estado
           fecha_hora
           createdAt
@@ -88,7 +85,6 @@ export const onCreateIncidencia = /* GraphQL */ `
   ) {
     onCreateIncidencia(filter: $filter) {
       id
-      title
       estado
       conductor {
         id
@@ -105,7 +101,6 @@ export const onCreateIncidencia = /* GraphQL */ `
         id
         incidencia {
           id
-          title
           estado
           fecha_hora
           createdAt
@@ -133,7 +128,6 @@ export const onUpdateIncidencia = /* GraphQL */ `
   ) {
     onUpdateIncidencia(filter: $filter) {
       id
-      title
       estado
       conductor {
         id
@@ -150,7 +144,6 @@ export const onUpdateIncidencia = /* GraphQL */ `
         id
         incidencia {
           id
-          title
           estado
           fecha_hora
           createdAt
@@ -178,7 +171,6 @@ export const onDeleteIncidencia = /* GraphQL */ `
   ) {
     onDeleteIncidencia(filter: $filter) {
       id
-      title
       estado
       conductor {
         id
@@ -195,7 +187,6 @@ export const onDeleteIncidencia = /* GraphQL */ `
         id
         incidencia {
           id
-          title
           estado
           fecha_hora
           createdAt
@@ -223,7 +214,6 @@ export const onCreateDetalles = /* GraphQL */ `
       id
       incidencia {
         id
-        title
         estado
         conductor {
           id
@@ -261,7 +251,6 @@ export const onUpdateDetalles = /* GraphQL */ `
       id
       incidencia {
         id
-        title
         estado
         conductor {
           id
@@ -299,7 +288,6 @@ export const onDeleteDetalles = /* GraphQL */ `
       id
       incidencia {
         id
-        title
         estado
         conductor {
           id

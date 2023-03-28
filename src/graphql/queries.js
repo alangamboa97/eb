@@ -10,7 +10,6 @@ export const getConductor = /* GraphQL */ `
       incidencias {
         items {
           id
-          title
           estado
           fecha_hora
           createdAt
@@ -52,7 +51,6 @@ export const getIncidencia = /* GraphQL */ `
   query GetIncidencia($id: ID!) {
     getIncidencia(id: $id) {
       id
-      title
       estado
       conductor {
         id
@@ -69,7 +67,6 @@ export const getIncidencia = /* GraphQL */ `
         id
         incidencia {
           id
-          title
           estado
           fecha_hora
           createdAt
@@ -100,7 +97,6 @@ export const listIncidencias = /* GraphQL */ `
     listIncidencias(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        title
         estado
         conductor {
           id
@@ -134,7 +130,6 @@ export const getDetalles = /* GraphQL */ `
       id
       incidencia {
         id
-        title
         estado
         conductor {
           id
@@ -177,7 +172,6 @@ export const listDetalles = /* GraphQL */ `
         id
         incidencia {
           id
-          title
           estado
           fecha_hora
           createdAt

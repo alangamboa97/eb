@@ -15,7 +15,6 @@ type Conductor @model @auth(rules: [{ allow: private, operations: [create, read,
 
 type Incidencia @model @auth(rules: [{ allow: private, operations: [create, read, update, delete] }]){
   id: ID
-  title: String
   estado: Boolean
   conductor: Conductor @belongsTo
   detalles: Detalles @hasOne

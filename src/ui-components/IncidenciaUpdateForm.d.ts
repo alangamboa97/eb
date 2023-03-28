@@ -14,19 +14,16 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type IncidenciaUpdateFormInputValues = {
-    title?: string;
     estado?: boolean;
     fecha_hora?: string;
 };
 export declare type IncidenciaUpdateFormValidationValues = {
-    title?: ValidationFunction<string>;
     estado?: ValidationFunction<boolean>;
     fecha_hora?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type IncidenciaUpdateFormOverridesProps = {
     IncidenciaUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    title?: PrimitiveOverrideProps<TextFieldProps>;
     estado?: PrimitiveOverrideProps<SwitchFieldProps>;
     fecha_hora?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;

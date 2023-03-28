@@ -29,22 +29,18 @@ export default function IncidenciaCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    title: "",
     estado: false,
     fecha_hora: "",
   };
-  const [title, setTitle] = React.useState(initialValues.title);
   const [estado, setEstado] = React.useState(initialValues.estado);
   const [fecha_hora, setFecha_hora] = React.useState(initialValues.fecha_hora);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setTitle(initialValues.title);
     setEstado(initialValues.estado);
     setFecha_hora(initialValues.fecha_hora);
     setErrors({});
   };
   const validations = {
-    title: [],
     estado: [],
     fecha_hora: [],
   };
@@ -74,7 +70,6 @@ export default function IncidenciaCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          title,
           estado,
           fecha_hora,
         };
@@ -122,32 +117,6 @@ export default function IncidenciaCreateForm(props) {
       {...getOverrideProps(overrides, "IncidenciaCreateForm")}
       {...rest}
     >
-      <TextField
-        label="Title"
-        isRequired={false}
-        isReadOnly={false}
-        value={title}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              title: value,
-              estado,
-              fecha_hora,
-            };
-            const result = onChange(modelFields);
-            value = result?.title ?? value;
-          }
-          if (errors.title?.hasError) {
-            runValidationTasks("title", value);
-          }
-          setTitle(value);
-        }}
-        onBlur={() => runValidationTasks("title", title)}
-        errorMessage={errors.title?.errorMessage}
-        hasError={errors.title?.hasError}
-        {...getOverrideProps(overrides, "title")}
-      ></TextField>
       <SwitchField
         label="Estado"
         defaultChecked={false}
@@ -157,7 +126,6 @@ export default function IncidenciaCreateForm(props) {
           let value = e.target.checked;
           if (onChange) {
             const modelFields = {
-              title,
               estado: value,
               fecha_hora,
             };
@@ -183,7 +151,6 @@ export default function IncidenciaCreateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              title,
               estado,
               fecha_hora: value,
             };

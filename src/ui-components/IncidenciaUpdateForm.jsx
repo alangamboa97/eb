@@ -30,11 +30,9 @@ export default function IncidenciaUpdateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    title: "",
     estado: false,
     fecha_hora: "",
   };
-  const [title, setTitle] = React.useState(initialValues.title);
   const [estado, setEstado] = React.useState(initialValues.estado);
   const [fecha_hora, setFecha_hora] = React.useState(initialValues.fecha_hora);
   const [errors, setErrors] = React.useState({});
@@ -42,7 +40,6 @@ export default function IncidenciaUpdateForm(props) {
     const cleanValues = incidenciaRecord
       ? { ...initialValues, ...incidenciaRecord }
       : initialValues;
-    setTitle(cleanValues.title);
     setEstado(cleanValues.estado);
     setFecha_hora(cleanValues.fecha_hora);
     setErrors({});
@@ -60,7 +57,6 @@ export default function IncidenciaUpdateForm(props) {
   }, [idProp, incidenciaModelProp]);
   React.useEffect(resetStateValues, [incidenciaRecord]);
   const validations = {
-    title: [],
     estado: [],
     fecha_hora: [],
   };
@@ -90,7 +86,6 @@ export default function IncidenciaUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          title,
           estado,
           fecha_hora,
         };
@@ -139,32 +134,6 @@ export default function IncidenciaUpdateForm(props) {
       {...getOverrideProps(overrides, "IncidenciaUpdateForm")}
       {...rest}
     >
-      <TextField
-        label="Title"
-        isRequired={false}
-        isReadOnly={false}
-        value={title}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              title: value,
-              estado,
-              fecha_hora,
-            };
-            const result = onChange(modelFields);
-            value = result?.title ?? value;
-          }
-          if (errors.title?.hasError) {
-            runValidationTasks("title", value);
-          }
-          setTitle(value);
-        }}
-        onBlur={() => runValidationTasks("title", title)}
-        errorMessage={errors.title?.errorMessage}
-        hasError={errors.title?.hasError}
-        {...getOverrideProps(overrides, "title")}
-      ></TextField>
       <SwitchField
         label="Estado"
         defaultChecked={false}
@@ -174,7 +143,6 @@ export default function IncidenciaUpdateForm(props) {
           let value = e.target.checked;
           if (onChange) {
             const modelFields = {
-              title,
               estado: value,
               fecha_hora,
             };
@@ -200,7 +168,6 @@ export default function IncidenciaUpdateForm(props) {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              title,
               estado,
               fecha_hora: value,
             };
