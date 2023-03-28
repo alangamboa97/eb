@@ -3,6 +3,13 @@ import { API, graphqlOperation } from "aws-amplify";
 import { useState, useEffect } from "react";
 import { listConductors } from "../graphql/queries";
 import * as mutations from '../graphql/mutations';
+import {
+  Table,
+  TableCell,
+  TableBody,
+  TableHead,
+  TableRow,
+} from '@aws-amplify/ui-react';
 
 
 

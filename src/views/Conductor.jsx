@@ -4,6 +4,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import * as queries from '../graphql/queries';
 import { useState, useEffect } from "react";
 import { listConductors } from "../graphql/queries";
+import { Link } from "react-router-dom";
 import {
   Table,
   TableCell,
@@ -60,13 +61,15 @@ export default function Conductor(){
     
       {conductores.map(conductor =>{
           return(
-            
+          
             <TableRow>
-            <TableCell> <div>{conductor.id}</div></TableCell>
+           <TableCell> <div>{conductor.id}</div></TableCell>
             <TableCell> <div>{conductor.nombre}</div></TableCell>
             <TableCell> <div>{conductor.createdAt}</div></TableCell>
-            <TableCell> <div>{conductor.estado}</div></TableCell>             
+            <TableCell> <div>{conductor.estado}</div></TableCell>
+                         
           </TableRow>
+          
       
           )
 

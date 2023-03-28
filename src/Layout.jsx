@@ -49,7 +49,7 @@ export function Layout() {
     <>
      
       
-     <div className="min-h-screen grid grid-col-1 lg:grid-cols-6">
+     <div className="min-h-screen grid grid-col-1 lg:grid-cols-6 bg-slate-100">
       {/*Sidebar*/}
       <div className={`fixed lg:static w-[80%] md:w-[40%] lg:w-full top-0 z-50 bg-gray-200 transition-all ${
           sidebar ? "left-0" : "-left-full"
@@ -84,6 +84,14 @@ export function Layout() {
             transition-colors font-semibold rounded-sm">
             <RiDashboard2Line/>
               Ubicacion
+              
+                </Link>
+          </li>
+          <li>
+            <Link to="/incidencias" className="flex items-center gap-4 text-gray-700 hover:bg-blue-800 p-4 hover:text-white 
+            transition-colors font-semibold rounded-sm">
+            <RiDashboard2Line/>
+              Incidencias
               
                 </Link>
           </li>

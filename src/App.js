@@ -9,6 +9,7 @@ import Home from './Home';
 import Conductor from './views/Conductor';
 import Incidencia from './views/Incidencia';
 import Ubicacion from './views/Ubicacion';
+import Incidencias from './components/Incidencias';
 import { Layout } from './Layout';
 import { Login } from './Login';
 import '@aws-amplify/ui-react/styles.css';
@@ -42,10 +43,10 @@ I18n.putVocabularies(dict);
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route
-            path="/main"
+            path="/incidencias"
             element={
               <RequireAuth>
-                <Ubicacion />
+                <Incidencias />
               </RequireAuth>
             }
           />
