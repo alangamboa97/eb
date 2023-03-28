@@ -6,16 +6,16 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { RequireAuth } from './RequireAuth';
 import './App.css';
 import Home from './Home';
-import Conductor from './Conductor';
-import Incidencia from './Incidencia';
-import Ubicacion from './Ubicacion';
+import Conductor from './views/Conductor';
+import Incidencia from './views/Incidencia';
+import Ubicacion from './views/Ubicacion';
 import { Layout } from './Layout';
 import { Login } from './Login';
 import '@aws-amplify/ui-react/styles.css';
 
 
 import { I18n } from 'aws-amplify';
-import Main from './Main';
+
 Amplify.configure(config);
 
 I18n.setLanguage('es');
@@ -45,7 +45,7 @@ I18n.putVocabularies(dict);
             path="/main"
             element={
               <RequireAuth>
-                <Main />
+                <Ubicacion />
               </RequireAuth>
             }
           />

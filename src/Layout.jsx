@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuthenticator, Button, Heading, View, TabItem, Tabs, Menu, MenuItem, Divider} from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import { Main } from './Main';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import {
