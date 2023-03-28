@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { Amplify,API} from 'aws-amplify';
 import config from './aws-exports'; 
 import { Authenticator} from '@aws-amplify/ui-react';
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { RequireAuth } from './RequireAuth';
 import './App.css';
@@ -16,6 +15,7 @@ import '@aws-amplify/ui-react/styles.css';
 
 
 import { I18n } from 'aws-amplify';
+import Main from './Main';
 Amplify.configure(config);
 
 I18n.setLanguage('es');
@@ -42,10 +42,10 @@ I18n.putVocabularies(dict);
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route
-            path="/Home"
+            path="/main"
             element={
               <RequireAuth>
-                <Home />
+                <Main />
               </RequireAuth>
             }
           />
