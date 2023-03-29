@@ -1,7 +1,9 @@
 import React from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { useAuthenticator, Button, Heading, View, TabItem, Tabs, Menu, MenuItem, Divider} from '@aws-amplify/ui-react';
+import { Authenticator, useAuthenticator, Button, Heading, View, TabItem, Tabs, Menu, MenuItem, Divider} from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
+import { Amplify, API, graphqlOperation } from "aws-amplify";
+import config from './aws-exports';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import {
@@ -24,10 +26,15 @@ import {
   RiAmazonLine,
 } from "react-icons/ri";
 export function Layout() {
+
+
+  
   const { route, signOut } = useAuthenticator((context) => [
     context.route,
     context.signOut,
   ]);
+
+
   const navigate = useNavigate();
   const [sidebar, setSidebar] = useState(false);
 
