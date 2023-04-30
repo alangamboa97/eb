@@ -7,9 +7,9 @@ import { RequireAuth } from './RequireAuth';
 import './App.css';
 import Home from './Home';
 import Conductor from './views/Conductor';
-import Incidencia from './views/Incidencia';
+import Incidencias from './views/Incidencias';
 import Ubicacion from './views/Ubicacion';
-import Incidencias from './components/Incidencias';
+import Incidencia from './components/Incidencia';
 import { Layout } from './Layout';
 import { Login } from './Login';
 import '@aws-amplify/ui-react/styles.css';
@@ -17,9 +17,11 @@ import '@aws-amplify/ui-react/styles.css';
 
 import { I18n } from 'aws-amplify';
 
+import ConductorPerfil from './views/ConductorPerfil';
+
 Amplify.configure(config);
 
-I18n.setLanguage('es');
+I18n.setLanguage('es'); 
 const dict = {
  
   es: {
@@ -41,7 +43,27 @@ I18n.putVocabularies(dict);
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<Conductor />} />
+          <Route
+            path="/conductor"
+            element={
+              <RequireAuth>
+                <Conductor />
+              </RequireAuth>
+              
+            }>
+               
+          </Route>
+          <Route path='conductor/:id' 
+              element= {
+              <RequireAuth>
+                <ConductorPerfil/>
+              </RequireAuth>}/>
+                
+
+         
+       
+          
           <Route
             path="/incidencias"
             element={
@@ -49,17 +71,10 @@ I18n.putVocabularies(dict);
                 <Incidencias />
               </RequireAuth>
             }
+            
           />
-          <Route
-            path="/conductor"
-            element={
-              <RequireAuth>
-                <Conductor />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/incidencia"
+           <Route
+            path="/incidencias/:id"
             element={
               <RequireAuth>
                 <Incidencia />
@@ -75,6 +90,7 @@ I18n.putVocabularies(dict);
               </RequireAuth>
             }
           />
+         
           <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
