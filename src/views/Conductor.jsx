@@ -1,10 +1,10 @@
 
-import { useAuthenticator, Authenticator, Card} from "@aws-amplify/ui-react";
+import { useAuthenticator, Authenticator, Card, Button, ButtonGroup} from "@aws-amplify/ui-react";
 import { API, graphqlOperation } from "aws-amplify";
-import * as queries from '../graphql/queries';
 import { useState, useEffect } from "react";
 import { listConductors } from "../graphql/queries";
-import { Link } from "react-router-dom";
+import { Link, NavLink, Outlet, useParams } from "react-router-dom";
+import CondcutorPerfil from "./ConductorPerfil";
 import {
   Table,
   TableCell,
@@ -15,6 +15,7 @@ import {
 
 export default function Conductor(){
     const { route } = useAuthenticator((context) => [context.route]);
+    
 
     const message =
       route === 'authenticated' ? 'FIRST PROTECTED ROUTE!' : 'Loading...';
@@ -37,12 +38,17 @@ export default function Conductor(){
 
       }
     }
+   
+
+
+
       return (
+        
           <Authenticator>
           {({ signOut, user }) => (
             <main>
+            <Outlet />
             
-
              <Card>
 <Table
   caption=""
@@ -52,7 +58,7 @@ export default function Conductor(){
       <TableCell as="th">ID</TableCell>
       <TableCell as="th">Conductor</TableCell>
       <TableCell as="th">Fecha</TableCell>
-      <TableCell as="th">Estado</TableCell>
+      <TableCell as="th">Acciones</TableCell>
     </TableRow>
   </TableHead>
   <TableBody>
@@ -61,12 +67,12 @@ export default function Conductor(){
     
       {conductores.map(conductor =>{
           return(
-          
-            <TableRow>
-           <TableCell> <div>{conductor.id}</div></TableCell>
+            
+           <TableRow>
+            <TableCell> <Link to={`/conductor/${conductor.id}`} ><div>{conductor.id}</div></Link></TableCell>
             <TableCell> <div>{conductor.nombre}</div></TableCell>
             <TableCell> <div>{conductor.createdAt}</div></TableCell>
-            <TableCell> <div>{conductor.estado}</div></TableCell>
+            <TableCell> <div>{conductor.estado}<Button>Modificar</Button> <Button>Eliminar</Button></div></TableCell>
                          
           </TableRow>
           
@@ -80,10 +86,12 @@ export default function Conductor(){
   </TableBody>
 </Table>
 </Card> 
+
   
             </main>
           )}
         </Authenticator>
+        
         );
 };
 
