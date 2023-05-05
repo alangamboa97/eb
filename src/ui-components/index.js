@@ -10,5 +10,3 @@ export { default as ConductorCreateForm } from "./ConductorCreateForm";
 export { default as ConductorUpdateForm } from "./ConductorUpdateForm";
 export { default as IncidenciaCreateForm } from "./IncidenciaCreateForm";
 export { default as IncidenciaUpdateForm } from "./IncidenciaUpdateForm";
-export { default as DetallesCreateForm } from "./DetallesCreateForm";
-export { default as DetallesUpdateForm } from "./DetallesUpdateForm";

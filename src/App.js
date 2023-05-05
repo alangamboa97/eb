@@ -18,6 +18,7 @@ import '@aws-amplify/ui-react/styles.css';
 import { I18n } from 'aws-amplify';
 
 import ConductorPerfil from './views/ConductorPerfil';
+import MapView from './components/MapView';
 
 Amplify.configure(config);
 
@@ -78,6 +79,14 @@ I18n.putVocabularies(dict);
             element={
               <RequireAuth>
                 <Incidencia />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/incidencias/:id/ubicacion"
+            element={
+              <RequireAuth>
+                <MapView />
               </RequireAuth>
             }
           />

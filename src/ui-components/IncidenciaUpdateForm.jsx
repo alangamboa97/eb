@@ -31,9 +31,13 @@ export default function IncidenciaUpdateForm(props) {
   } = props;
   const initialValues = {
     estado: false,
+    url_video: "",
+    ubicacion: "",
     fecha_hora: "",
   };
   const [estado, setEstado] = React.useState(initialValues.estado);
+  const [url_video, setUrl_video] = React.useState(initialValues.url_video);
+  const [ubicacion, setUbicacion] = React.useState(initialValues.ubicacion);
   const [fecha_hora, setFecha_hora] = React.useState(initialValues.fecha_hora);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -41,6 +45,8 @@ export default function IncidenciaUpdateForm(props) {
       ? { ...initialValues, ...incidenciaRecord }
       : initialValues;
     setEstado(cleanValues.estado);
+    setUrl_video(cleanValues.url_video);
+    setUbicacion(cleanValues.ubicacion);
     setFecha_hora(cleanValues.fecha_hora);
     setErrors({});
   };
@@ -58,6 +64,8 @@ export default function IncidenciaUpdateForm(props) {
   React.useEffect(resetStateValues, [incidenciaRecord]);
   const validations = {
     estado: [],
+    url_video: [],
+    ubicacion: [],
     fecha_hora: [],
   };
   const runValidationTasks = async (
@@ -87,6 +95,8 @@ export default function IncidenciaUpdateForm(props) {
         event.preventDefault();
         let modelFields = {
           estado,
+          url_video,
+          ubicacion,
           fecha_hora,
         };
         const validationResponses = await Promise.all(
@@ -144,6 +154,8 @@ export default function IncidenciaUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               estado: value,
+              url_video,
+              ubicacion,
               fecha_hora,
             };
             const result = onChange(modelFields);
@@ -160,6 +172,60 @@ export default function IncidenciaUpdateForm(props) {
         {...getOverrideProps(overrides, "estado")}
       ></SwitchField>
       <TextField
+        label="Url video"
+        isRequired={false}
+        isReadOnly={false}
+        value={url_video}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              estado,
+              url_video: value,
+              ubicacion,
+              fecha_hora,
+            };
+            const result = onChange(modelFields);
+            value = result?.url_video ?? value;
+          }
+          if (errors.url_video?.hasError) {
+            runValidationTasks("url_video", value);
+          }
+          setUrl_video(value);
+        }}
+        onBlur={() => runValidationTasks("url_video", url_video)}
+        errorMessage={errors.url_video?.errorMessage}
+        hasError={errors.url_video?.hasError}
+        {...getOverrideProps(overrides, "url_video")}
+      ></TextField>
+      <TextField
+        label="Ubicacion"
+        isRequired={false}
+        isReadOnly={false}
+        value={ubicacion}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              estado,
+              url_video,
+              ubicacion: value,
+              fecha_hora,
+            };
+            const result = onChange(modelFields);
+            value = result?.ubicacion ?? value;
+          }
+          if (errors.ubicacion?.hasError) {
+            runValidationTasks("ubicacion", value);
+          }
+          setUbicacion(value);
+        }}
+        onBlur={() => runValidationTasks("ubicacion", ubicacion)}
+        errorMessage={errors.ubicacion?.errorMessage}
+        hasError={errors.ubicacion?.hasError}
+        {...getOverrideProps(overrides, "ubicacion")}
+      ></TextField>
+      <TextField
         label="Fecha hora"
         isRequired={false}
         isReadOnly={false}
@@ -169,6 +235,8 @@ export default function IncidenciaUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               estado,
+              url_video,
+              ubicacion,
               fecha_hora: value,
             };
             const result = onChange(modelFields);

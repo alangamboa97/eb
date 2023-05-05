@@ -12,19 +12,14 @@ type Conductor @model @auth(rules: [{ allow: private, operations: [create, read,
 }
 
 
-
 type Incidencia @model @auth(rules: [{ allow: private, operations: [create, read, update, delete] }]){
   id: ID
-  estado: Boolean
   conductor: Conductor @belongsTo
-  detalles: Detalles @hasOne
+  estado: Boolean
+  url_video: String
+  ubicacion: String
   fecha_hora: String
 }
 
 
-type Detalles @model @auth(rules: [{ allow: private, operations: [create, read, update, delete] }]){
-  id: ID
-  incidencia: Incidencia @belongsTo
-  ubicacion: String
-  url_video: String
-}
+

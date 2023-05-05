@@ -14,11 +14,12 @@ export const createConductor = /* GraphQL */ `
         items {
           id
           estado
+          url_video
+          ubicacion
           fecha_hora
           createdAt
           updatedAt
           conductorIncidenciasId
-          incidenciaDetallesId
         }
         nextToken
       }
@@ -41,11 +42,12 @@ export const updateConductor = /* GraphQL */ `
         items {
           id
           estado
+          url_video
+          ubicacion
           fecha_hora
           createdAt
           updatedAt
           conductorIncidenciasId
-          incidenciaDetallesId
         }
         nextToken
       }
@@ -68,11 +70,12 @@ export const deleteConductor = /* GraphQL */ `
         items {
           id
           estado
+          url_video
+          ubicacion
           fecha_hora
           createdAt
           updatedAt
           conductorIncidenciasId
-          incidenciaDetallesId
         }
         nextToken
       }
@@ -89,7 +92,6 @@ export const createIncidencia = /* GraphQL */ `
   ) {
     createIncidencia(input: $input, condition: $condition) {
       id
-      estado
       conductor {
         id
         nombre
@@ -101,28 +103,13 @@ export const createIncidencia = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      detalles {
-        id
-        incidencia {
-          id
-          estado
-          fecha_hora
-          createdAt
-          updatedAt
-          conductorIncidenciasId
-          incidenciaDetallesId
-        }
-        ubicacion
-        url_video
-        createdAt
-        updatedAt
-        detallesIncidenciaId
-      }
+      estado
+      url_video
+      ubicacion
       fecha_hora
       createdAt
       updatedAt
       conductorIncidenciasId
-      incidenciaDetallesId
     }
   }
 `;
@@ -133,7 +120,6 @@ export const updateIncidencia = /* GraphQL */ `
   ) {
     updateIncidencia(input: $input, condition: $condition) {
       id
-      estado
       conductor {
         id
         nombre
@@ -145,28 +131,13 @@ export const updateIncidencia = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      detalles {
-        id
-        incidencia {
-          id
-          estado
-          fecha_hora
-          createdAt
-          updatedAt
-          conductorIncidenciasId
-          incidenciaDetallesId
-        }
-        ubicacion
-        url_video
-        createdAt
-        updatedAt
-        detallesIncidenciaId
-      }
+      estado
+      url_video
+      ubicacion
       fecha_hora
       createdAt
       updatedAt
       conductorIncidenciasId
-      incidenciaDetallesId
     }
   }
 `;
@@ -177,7 +148,6 @@ export const deleteIncidencia = /* GraphQL */ `
   ) {
     deleteIncidencia(input: $input, condition: $condition) {
       id
-      estado
       conductor {
         id
         nombre
@@ -189,148 +159,13 @@ export const deleteIncidencia = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      detalles {
-        id
-        incidencia {
-          id
-          estado
-          fecha_hora
-          createdAt
-          updatedAt
-          conductorIncidenciasId
-          incidenciaDetallesId
-        }
-        ubicacion
-        url_video
-        createdAt
-        updatedAt
-        detallesIncidenciaId
-      }
+      estado
+      url_video
+      ubicacion
       fecha_hora
       createdAt
       updatedAt
       conductorIncidenciasId
-      incidenciaDetallesId
-    }
-  }
-`;
-export const createDetalles = /* GraphQL */ `
-  mutation CreateDetalles(
-    $input: CreateDetallesInput!
-    $condition: ModelDetallesConditionInput
-  ) {
-    createDetalles(input: $input, condition: $condition) {
-      id
-      incidencia {
-        id
-        estado
-        conductor {
-          id
-          nombre
-          apellido
-          num_incidencias
-          createdAt
-          updatedAt
-        }
-        detalles {
-          id
-          ubicacion
-          url_video
-          createdAt
-          updatedAt
-          detallesIncidenciaId
-        }
-        fecha_hora
-        createdAt
-        updatedAt
-        conductorIncidenciasId
-        incidenciaDetallesId
-      }
-      ubicacion
-      url_video
-      createdAt
-      updatedAt
-      detallesIncidenciaId
-    }
-  }
-`;
-export const updateDetalles = /* GraphQL */ `
-  mutation UpdateDetalles(
-    $input: UpdateDetallesInput!
-    $condition: ModelDetallesConditionInput
-  ) {
-    updateDetalles(input: $input, condition: $condition) {
-      id
-      incidencia {
-        id
-        estado
-        conductor {
-          id
-          nombre
-          apellido
-          num_incidencias
-          createdAt
-          updatedAt
-        }
-        detalles {
-          id
-          ubicacion
-          url_video
-          createdAt
-          updatedAt
-          detallesIncidenciaId
-        }
-        fecha_hora
-        createdAt
-        updatedAt
-        conductorIncidenciasId
-        incidenciaDetallesId
-      }
-      ubicacion
-      url_video
-      createdAt
-      updatedAt
-      detallesIncidenciaId
-    }
-  }
-`;
-export const deleteDetalles = /* GraphQL */ `
-  mutation DeleteDetalles(
-    $input: DeleteDetallesInput!
-    $condition: ModelDetallesConditionInput
-  ) {
-    deleteDetalles(input: $input, condition: $condition) {
-      id
-      incidencia {
-        id
-        estado
-        conductor {
-          id
-          nombre
-          apellido
-          num_incidencias
-          createdAt
-          updatedAt
-        }
-        detalles {
-          id
-          ubicacion
-          url_video
-          createdAt
-          updatedAt
-          detallesIncidenciaId
-        }
-        fecha_hora
-        createdAt
-        updatedAt
-        conductorIncidenciasId
-        incidenciaDetallesId
-      }
-      ubicacion
-      url_video
-      createdAt
-      updatedAt
-      detallesIncidenciaId
     }
   }
 `;

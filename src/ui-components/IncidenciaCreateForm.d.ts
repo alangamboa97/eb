@@ -14,16 +14,22 @@ export declare type ValidationResponse = {
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type IncidenciaCreateFormInputValues = {
     estado?: boolean;
+    url_video?: string;
+    ubicacion?: string;
     fecha_hora?: string;
 };
 export declare type IncidenciaCreateFormValidationValues = {
     estado?: ValidationFunction<boolean>;
+    url_video?: ValidationFunction<string>;
+    ubicacion?: ValidationFunction<string>;
     fecha_hora?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type IncidenciaCreateFormOverridesProps = {
     IncidenciaCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     estado?: PrimitiveOverrideProps<SwitchFieldProps>;
+    url_video?: PrimitiveOverrideProps<TextFieldProps>;
+    ubicacion?: PrimitiveOverrideProps<TextFieldProps>;
     fecha_hora?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type IncidenciaCreateFormProps = React.PropsWithChildren<{

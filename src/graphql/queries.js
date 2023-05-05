@@ -11,11 +11,12 @@ export const getConductor = /* GraphQL */ `
         items {
           id
           estado
+          url_video
+          ubicacion
           fecha_hora
           createdAt
           updatedAt
           conductorIncidenciasId
-          incidenciaDetallesId
         }
         nextToken
       }
@@ -51,7 +52,6 @@ export const getIncidencia = /* GraphQL */ `
   query GetIncidencia($id: ID!) {
     getIncidencia(id: $id) {
       id
-      estado
       conductor {
         id
         nombre
@@ -63,28 +63,13 @@ export const getIncidencia = /* GraphQL */ `
         createdAt
         updatedAt
       }
-      detalles {
-        id
-        incidencia {
-          id
-          estado
-          fecha_hora
-          createdAt
-          updatedAt
-          conductorIncidenciasId
-          incidenciaDetallesId
-        }
-        ubicacion
-        url_video
-        createdAt
-        updatedAt
-        detallesIncidenciaId
-      }
+      estado
+      url_video
+      ubicacion
       fecha_hora
       createdAt
       updatedAt
       conductorIncidenciasId
-      incidenciaDetallesId
     }
   }
 `;
@@ -97,7 +82,6 @@ export const listIncidencias = /* GraphQL */ `
     listIncidencias(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        estado
         conductor {
           id
           nombre
@@ -106,84 +90,13 @@ export const listIncidencias = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        detalles {
-          id
-          ubicacion
-          url_video
-          createdAt
-          updatedAt
-          detallesIncidenciaId
-        }
-        fecha_hora
-        createdAt
-        updatedAt
-        conductorIncidenciasId
-        incidenciaDetallesId
-      }
-      nextToken
-    }
-  }
-`;
-export const getDetalles = /* GraphQL */ `
-  query GetDetalles($id: ID!) {
-    getDetalles(id: $id) {
-      id
-      incidencia {
-        id
         estado
-        conductor {
-          id
-          nombre
-          apellido
-          num_incidencias
-          createdAt
-          updatedAt
-        }
-        detalles {
-          id
-          ubicacion
-          url_video
-          createdAt
-          updatedAt
-          detallesIncidenciaId
-        }
-        fecha_hora
-        createdAt
-        updatedAt
-        conductorIncidenciasId
-        incidenciaDetallesId
-      }
-      ubicacion
-      url_video
-      createdAt
-      updatedAt
-      detallesIncidenciaId
-    }
-  }
-`;
-export const listDetalles = /* GraphQL */ `
-  query ListDetalles(
-    $filter: ModelDetallesFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listDetalles(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        incidencia {
-          id
-          estado
-          fecha_hora
-          createdAt
-          updatedAt
-          conductorIncidenciasId
-          incidenciaDetallesId
-        }
-        ubicacion
         url_video
+        ubicacion
+        fecha_hora
         createdAt
         updatedAt
-        detallesIncidenciaId
+        conductorIncidenciasId
       }
       nextToken
     }

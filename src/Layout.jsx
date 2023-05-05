@@ -25,10 +25,12 @@ import {
   RiGoogleLine,
   RiAmazonLine,
 } from "react-icons/ri";
+
+Amplify.configure(config);
 export function Layout() {
 
 
-  
+
   const { route, signOut } = useAuthenticator((context) => [
     context.route,
     context.signOut,
@@ -49,8 +51,8 @@ export function Layout() {
   return (
    
 
-
-
+    
+    <Authenticator className='items-center'>
 
     
     <>
@@ -71,23 +73,23 @@ export function Layout() {
       <nav>
         <ul>
           <li>
-            <Link to="/conductor" className="flex items-center gap-4 text-gray-700 hover:bg-blue-800 p-4 hover:text-white rounded-sm
+            <Link to="/conductor" className="flex items-center gap-4 text-gray-700 hover:bg-gray-900 p-4 hover:text-white rounded-sm
             transition-colors font-semibold">
             <RiDashboard2Line/>
-              Conductor
+              Conductores
               
                 </Link>
           </li>
           <li>
-            <Link to='/incidencia' className="flex items-center gap-4 text-gray-700 hover:bg-blue-800 p-4 hover:text-white 
+            <Link to='/incidencias' className="flex items-center gap-4 text-gray-700 hover:bg-gray-900 p-4 hover:text-white 
             transition-colors font-semibold rounded-sm">
             <RiDashboard2Line/>
-              Incidencia
+              Incidencias
               
                 </Link>
           </li>
           <li>
-            <Link to="/ubicacion" className="flex items-center gap-4 text-gray-700 hover:bg-blue-800 p-4 hover:text-white 
+            <Link to="/ubicacion" className="flex items-center gap-4 text-gray-700 hover:bg-gray-900 p-4 hover:text-white 
             transition-colors font-semibold rounded-sm">
             <RiDashboard2Line/>
               Ubicacion
@@ -95,10 +97,10 @@ export function Layout() {
                 </Link>
           </li>
           <li>
-            <Link to="/incidencias" className="flex items-center gap-4 text-gray-700 hover:bg-blue-800 p-4 hover:text-white 
+            <Link to="/incidencia" className="flex items-center gap-4 text-gray-700 hover:bg-gray-900 p-4 hover:text-white 
             transition-colors font-semibold rounded-sm">
             <RiDashboard2Line/>
-              Incidencias
+              Incidencia
               
                 </Link>
           </li>
@@ -108,7 +110,7 @@ export function Layout() {
       <div className='flex flex-col gap-4'>
         <img src="footer.svg" alt="Image" />
       
-      <Link onClick={signOut} className="flex items-center gap-4 text-gray-700 hover:bg-blue-800 p-3 hover:text-white 
+      <Link onClick={signOut} className="flex items-center gap-4 text-gray-700 hover:bg-gray-800 p-3 hover:text-white 
             transition-colors font-semibold rounded-sm  ">
             <RiDashboard2Line/>
               Cerrar sesion
@@ -135,7 +137,7 @@ export function Layout() {
               <input
                 type="text"
                 className="bg-gray-100 py-2 pl-8 pr-4 outline-none rounded-lg w-full"
-                placeholder="Search"
+                placeholder="Buscar"
               />
             </div>
           </form>
@@ -150,7 +152,7 @@ export function Layout() {
               </li>
               <li>
                 <a href="#" className="flex items-center gap-1">
-                  Jorge Luis Trejo <RiArrowDownSLine />
+                  alangam97@gmail.com <RiArrowDownSLine />
                 </a>
               </li>
             </ul>
@@ -165,7 +167,7 @@ export function Layout() {
      
       
     </>
-    
+    </Authenticator>
     
   );
 }
