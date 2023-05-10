@@ -11,6 +11,7 @@ export default function Incidencias() {
 
   const { id } = useParams();
   const [incidencia, setIncidencia] = React.useState([]);
+  const [conductor, setConductor] = React.useState([]);
 
   useEffect(()=>{
     fetchIncidencia()
@@ -20,9 +21,12 @@ export default function Incidencias() {
     try{
       const incidenciaData = await API.graphql(graphqlOperation(getIncidencia, {id: id}));
       const incidenciaDetails = incidenciaData.data.getIncidencia;
+      const conductorDetails = incidenciaData.data.getIncidencia.conductor; 
       
       setIncidencia(incidenciaDetails)
+      setConductor(conductorDetails)
       console.log('Incidencia', incidenciaDetails);
+      console.log('Conductor', conductorDetails);
 
     }
     catch (error){
@@ -62,6 +66,8 @@ const pendiente = 'Pendiente';
 const confirmar = 'Confirmada';
 const rechazada = 'Rechazada';
 
+
+
   
 function confirmarEstado(incidencia){
   if(incidencia === null){
@@ -91,17 +97,17 @@ function confirmarEstado(incidencia){
                   Estado: {confirmarEstado(incidencia.estado)}
                 </span>
               </h1>
-              <p className="text-gray-800">Nombre y Apellido Conductor</p>
-              <p className="text-gray-800">Fecha: {incidencia.createdAt}</p>
-              
+              <p className="text-gray-800">{conductor.nombre} {conductor.apellido}</p>
+              <p className="text-gray-800">Fecha: {incidencia.createdAt}  </p>
+
             {/* Video */}
-              
+            
             <div className="w-full md:w-[80%] flex items-center justify-start md:justify-left p-1">
             <ReactPlayer url={incidencia.url_video}controls play/>
             </div>
 
             {/* Info */}
-            
+          
               
             </div>
             

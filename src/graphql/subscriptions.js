@@ -1,87 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateConductor = /* GraphQL */ `
-  subscription OnCreateConductor(
-    $filter: ModelSubscriptionConductorFilterInput
-  ) {
-    onCreateConductor(filter: $filter) {
-      id
-      nombre
-      apellido
-      incidencias {
-        items {
-          id
-          estado
-          url_video
-          ubicacion
-          fecha_hora
-          createdAt
-          updatedAt
-          conductorIncidenciasId
-        }
-        nextToken
-      }
-      num_incidencias
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateConductor = /* GraphQL */ `
-  subscription OnUpdateConductor(
-    $filter: ModelSubscriptionConductorFilterInput
-  ) {
-    onUpdateConductor(filter: $filter) {
-      id
-      nombre
-      apellido
-      incidencias {
-        items {
-          id
-          estado
-          url_video
-          ubicacion
-          fecha_hora
-          createdAt
-          updatedAt
-          conductorIncidenciasId
-        }
-        nextToken
-      }
-      num_incidencias
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteConductor = /* GraphQL */ `
-  subscription OnDeleteConductor(
-    $filter: ModelSubscriptionConductorFilterInput
-  ) {
-    onDeleteConductor(filter: $filter) {
-      id
-      nombre
-      apellido
-      incidencias {
-        items {
-          id
-          estado
-          url_video
-          ubicacion
-          fecha_hora
-          createdAt
-          updatedAt
-          conductorIncidenciasId
-        }
-        nextToken
-      }
-      num_incidencias
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const onCreateIncidencia = /* GraphQL */ `
   subscription OnCreateIncidencia(
     $filter: ModelSubscriptionIncidenciaFilterInput
@@ -160,6 +79,87 @@ export const onDeleteIncidencia = /* GraphQL */ `
       createdAt
       updatedAt
       conductorIncidenciasId
+    }
+  }
+`;
+export const onCreateConductor = /* GraphQL */ `
+  subscription OnCreateConductor(
+    $filter: ModelSubscriptionConductorFilterInput
+  ) {
+    onCreateConductor(filter: $filter) {
+      id
+      nombre
+      apellido
+      incidencias {
+        items {
+          id
+          estado
+          url_video
+          ubicacion
+          fecha_hora
+          createdAt
+          updatedAt
+          conductorIncidenciasId
+        }
+        nextToken
+      }
+      num_incidencias
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateConductor = /* GraphQL */ `
+  subscription OnUpdateConductor(
+    $filter: ModelSubscriptionConductorFilterInput
+  ) {
+    onUpdateConductor(filter: $filter) {
+      id
+      nombre
+      apellido
+      incidencias {
+        items {
+          id
+          estado
+          url_video
+          ubicacion
+          fecha_hora
+          createdAt
+          updatedAt
+          conductorIncidenciasId
+        }
+        nextToken
+      }
+      num_incidencias
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteConductor = /* GraphQL */ `
+  subscription OnDeleteConductor(
+    $filter: ModelSubscriptionConductorFilterInput
+  ) {
+    onDeleteConductor(filter: $filter) {
+      id
+      nombre
+      apellido
+      incidencias {
+        items {
+          id
+          estado
+          url_video
+          ubicacion
+          fecha_hora
+          createdAt
+          updatedAt
+          conductorIncidenciasId
+        }
+        nextToken
+      }
+      num_incidencias
+      createdAt
+      updatedAt
     }
   }
 `;

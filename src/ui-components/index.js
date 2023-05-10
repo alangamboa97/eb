@@ -6,7 +6,7 @@
 
 export { default as studioTheme } from "./studioTheme";
 export { default as NewForm1 } from "./NewForm1";
-export { default as ConductorCreateForm } from "./ConductorCreateForm";
-export { default as ConductorUpdateForm } from "./ConductorUpdateForm";
 export { default as IncidenciaCreateForm } from "./IncidenciaCreateForm";
 export { default as IncidenciaUpdateForm } from "./IncidenciaUpdateForm";
+export { default as ConductorCreateForm } from "./ConductorCreateForm";
+export { default as ConductorUpdateForm } from "./ConductorUpdateForm";

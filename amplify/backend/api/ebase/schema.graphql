@@ -2,6 +2,16 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
  # FOR TESTING ONLY!
 
+type Incidencia @model @auth(rules: [{ allow: private, operations: [create, read, update, delete] }]){
+  id: ID
+  conductor: Conductor @belongsTo
+  estado: Boolean
+  url_video: String
+  ubicacion: String
+  fecha_hora: String
+}
+
+
 type Conductor @model @auth(rules: [{ allow: private, operations: [create, read, update, delete] }]) {
   id: ID
   nombre: String
@@ -12,14 +22,7 @@ type Conductor @model @auth(rules: [{ allow: private, operations: [create, read,
 }
 
 
-type Incidencia @model @auth(rules: [{ allow: private, operations: [create, read, update, delete] }]){
-  id: ID
-  conductor: Conductor @belongsTo
-  estado: Boolean
-  url_video: String
-  ubicacion: String
-  fecha_hora: String
-}
+
 
 
 
