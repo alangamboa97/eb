@@ -40,7 +40,10 @@ useEffect(()=>{
 
     return(
     
-<MapContainer center={[19.468725,-99.1345574]} zoom={13} className="h-screen: 100vh -">  
+<MapContainer 
+center={[19.468725,-99.1345574]}
+zoom={13} 
+style={{ height: 400, width: 700 }}>  
 <TileLayer
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

@@ -6,46 +6,8 @@ import { onCreateIncidencia } from "../graphql/subscriptions";
 import * as mutations from '../graphql/mutations';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
-
-import {
-  Table,
-  TableCell,
-  TableBody,
-  TableHead,
-  TableRow,
-  ThemeProvider,
-  Theme
-} from '@aws-amplify/ui-react';
 import { Link } from "react-router-dom";
 
-const theme = {
-  name: 'table-theme',
-  tokens: {
-    components: {
-      table: {
-        row: {
-          hover: {
-            backgroundColor: { value: '{colors.blue.80}' },
-          },
-
-          striped: {
-            backgroundColor: { value: '{colors.blue.10}' },
-          },
-        },
-
-        header: {
-          color: { value: '{colors.blue.80}' },
-          fontSize: { value: '{fontSizes.xl}' },
-        },
-
-        data: {
-          fontWeight: { value: '{fontWeights.semibold}' },
-        },
-      },
-    },
-  },
-};
 
 
 export default function Incidencia (){
@@ -77,7 +39,25 @@ export default function Incidencia (){
     
 
     },[])
-
+    const pendiente = 'Pendiente';
+    const confirmar = 'Confirmada';
+    const rechazada = 'Rechazada';
+   const num = incidencias.length
+ 
+    function confirmarEstado(incidencia){
+     if(incidencia === null){
+       return pendiente;
+      
+     }
+     if(incidencia === true){
+       return confirmar;
+       
+     }
+     else{
+       return rechazada;
+       
+     }
+   }
    
     
     
@@ -97,71 +77,67 @@ export default function Incidencia (){
         {({ signOut, user }) => (
           <main>
             
-          <ToastContainer />
-            <Card>
-            <ThemeProvider theme={theme} colorMode="dark">
-          <Table
-    caption=""
-    highlightOnHover={false}>
-  <TableHead>
-    <TableRow>
-      <TableCell as="th">ID</TableCell>
-      <TableCell as="th">Conductor</TableCell>
-      <TableCell as="th">Fecha</TableCell>
-      <TableCell as="th">Estado</TableCell>
-    </TableRow>
-  </TableHead>
-  <TableBody>
+            <div class="mt-12 flex flex-col justify-center">
    
-  
-    
-      {incidencias.map(incidencia =>{
-        const pendiente = 'Pendiente';
-        const confirmar = 'Confirmada';
-        const rechazada = 'Rechazada';
-
-        const data = {
-          nestedProp: incidencia.conductor.nombre
-        }
-        
-          
-        function confirmarEstado(incidencia){
-          if(incidencia === null){
-            return pendiente;
+   
+   <div class="relative overflow-x-auto">
+       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+               <tr>
+                   <th scope="col" class="px-6 py-3">
+                       ID
+                   </th>
+                   <th scope="col" class="px-6 py-3">
+                       Conductor
+                   </th>
+                   <th scope="col" class="px-6 py-3">
+                       Fecha
+                   </th>
+                   <th scope="col" class="px-6 py-3">
+                       Estado
+                   </th>
+                   
+               </tr>
+           </thead>
            
-          }
-          if(incidencia === true){
-            return confirmar;
-            
-          }
-          else{
-            return rechazada;
-            
-          }
-        }
-          
-          return(
-          
-            <TableRow>
-           <TableCell><Link to={`/incidencias/${incidencia.id}`}><div>{incidencia.id}</div></Link></TableCell>
-            <TableCell><div>{incidencia.conductor.nombre} {incidencia.conductor.apellido}</div></TableCell>
-            <TableCell> <div>{incidencia.createdAt}</div></TableCell>
-            <TableCell><div>{confirmarEstado(incidencia.estado)}</div></TableCell>
-                         
-          </TableRow>
-          
-      
-          )
-
-        })}
-        
-  
+           <tbody>
+             {incidencias.map((incidencia) => ( 
+               
+               
+                
+                  
+                
+                    
+             
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+               <Link to={`/incidencias/${incidencia.id}`}>
+                  {incidencia.id}
+                   </Link>
+              </th>
+              <th scope="col" class="px-6 py-3">
+                       {incidencia.conductor.nombre} {incidencia.conductor.apellido}
+                   </th>
+              <td class="px-6 py-4">
+                  {incidencia.createdAt}
+              </td>
+              <td class="px-6 py-4">
+                  {confirmarEstado(incidencia.estado)}
+              </td>
+             
+          </tr>
    
-  </TableBody>
-</Table>
-</ThemeProvider>
-</Card> 
-          
+           ))}
+              
+           
+              
+           </tbody>
+               </table>
+   </div>
+   
+     </div>
+   
+   
           </main>
         )}
       </Authenticator>
