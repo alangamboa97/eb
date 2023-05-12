@@ -8,22 +8,14 @@ import { Link } from "react-router-dom";
 import { useState } from 'react';
 import {
   RiDashboard2Line,
-  RiBriefcaseLine,
-  RiCalendar2Line,
-  RiMessage2Line,
-  RiLogoutBoxRLine,
+  
   RiMenu3Fill,
   RiCloseLine,
   RiNotification3Line,
   RiArrowDownSLine,
   RiSearchLine,
   RiCheckboxBlankCircleFill,
-  RiFilter3Line,
-  RiMapPinRangeLine,
-  RiDropboxFill,
-  RiTwitchLine,
-  RiGoogleLine,
-  RiAmazonLine,
+ 
 } from "react-icons/ri";
 
 Amplify.configure(config);

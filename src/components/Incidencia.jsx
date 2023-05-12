@@ -72,19 +72,23 @@ const rechazada = 'Rechazada';
   
 function confirmarEstado(incidencia){
   if(incidencia === null){
-    return pendiente;
+    return <span class="bg-blue-100 text-blue-800 text-l font-large mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Pendiente</span>
    
   }
   if(incidencia === true){
-    return confirmar;
+    return <span class="bg-green-100 text-green-800 text-l font-large mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Confirmada</span>
     
   }
   else{
-    return rechazada;
+    return <span class="bg-red-100 text-red-800 text-l font-large mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Rechazada</span>;
     
   }
 }
-  
+
+ 
+  const fecha = new Date(incidencia.createdAt).toLocaleDateString();
+  const hora = new Date(incidencia.createdAt).toLocaleTimeString();
+  console.log(fecha)
   return (
     <div class="p-10">
 <div class="p-8 bg-white shadow mt-10">
@@ -110,14 +114,15 @@ function confirmarEstado(incidencia){
 
   <div class="mt-10 text-left border-b pb-12">
     <h1 class="text-4xl font-medium text-gray-700">ID: <span class="font-light text-gray-500">{incidencia.id}</span></h1>
+    <p class="mt-2 text-gray-50">{confirmarEstado(incidencia.estado)}</p>
     <p class="font-light text-gray-600 mt-3">{conductor.nombre} {conductor.apellido}</p>
      
     <p class="text-gray-400">
           <ReactPlayer url={incidencia.url_video} width="50%" height="30%" controls={true} />
         </p>
         <div class="mt-10 text-right border-b pb-10">
-    <p class="mt-8 text-gray-500">Solution Manager - Creative Tim Officer</p>
-    <p class="mt-2 text-gray-500">University of Computer Science</p>
+    <p class="mt-8 text-gray-500">{fecha}</p>
+    
     <button
   class="text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
 >

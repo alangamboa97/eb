@@ -1,4 +1,4 @@
-import { useAuthenticator,Authenticator, Card} from "@aws-amplify/ui-react";
+import { useAuthenticator,Authenticator} from "@aws-amplify/ui-react";
 import { API, graphqlOperation } from "aws-amplify";
 import { useState, useEffect } from "react";
 import { listIncidencias } from "../graphql/queries";
@@ -16,15 +16,21 @@ export default function Incidencia (){
     const message =
     route === 'authenticated' ? 'FIRST PROTECTED ROUTE!' : 'Loading...';
     const [incidencias, setIncidencias] = useState([]);
-      
+    const [nuevaIncidencia, setNuevaIncidencia] = useState();
+    const [fecha_incidencia, setFechaIncidencia] = useState('');
+    
+    const notify = () => toast("Nueva incidencia registrada");
 
     const fetchIncidencias = async() =>{
       try{
         
         const incidenciaData = await API.graphql(graphqlOperation(listIncidencias));
         const incidenciaInfo = incidenciaData.data.listIncidencias.items;
+        const fechaIncidenciaInfo = incidenciaData.data.listIncidencias.items.createdAt;
+        
         console.log(incidenciaInfo);
         setIncidencias(incidenciaInfo)
+        setFechaIncidencia(fechaIncidenciaInfo)
 
       }
       catch (error){
@@ -34,42 +40,66 @@ export default function Incidencia (){
     }
     
     useEffect(()=>{
-      fetchIncidencias()
 
     
+      
+      fetchIncidencias();
 
-    },[])
-    const pendiente = 'Pendiente';
-    const confirmar = 'Confirmada';
-    const rechazada = 'Rechazada';
+      
+
+    },[nuevaIncidencia])
+
+    let subscriptionOnCreateIncidencia;
+
+    function handleSubscription(){
+      subscriptionOnCreateIncidencia = API.graphql(graphqlOperation(onCreateIncidencia)).subscribe({
+        next: (eventData) => {
+          setNuevaIncidencia(eventData);
+          notify();  
+        },
+      });
+    }
+
+    useEffect(() => { 
+      handleSubscription();
+      return () => subscriptionOnCreateIncidencia.unsubscribe();  
+    }, []);
+
+
+    const fechaHoy = new Date();
+    const dia = fechaHoy.getDate();
+    const mes = fechaHoy.getMonth() + 1;
+    const año = fechaHoy.getFullYear();
+
+   
+
+    const fecha = `${dia}/${mes}/${año}`;
+    console.log(fecha);
+
+
+    
    const num = incidencias.length
- 
+   var contador = num;
+
+
+   
+
     function confirmarEstado(incidencia){
      if(incidencia === null){
-       return pendiente;
+       return <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Pendiente</span>
       
      }
      if(incidencia === true){
-       return confirmar;
+       return <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Confirmada</span>
        
      }
      else{
-       return rechazada;
+       return <span class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Rechazada</span>;
        
      }
    }
-   
-    
-    
-    //lee los incidenciaes de la base de datos
-   
-    
-    
-    
-   
-   
-
-
+  
+  
 
 
     return (
@@ -105,8 +135,8 @@ export default function Incidencia (){
                
                
                 
-                  
-                
+               
+    
                     
              
               <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -122,7 +152,9 @@ export default function Incidencia (){
                   {incidencia.createdAt}
               </td>
               <td class="px-6 py-4">
+              
                   {confirmarEstado(incidencia.estado)}
+                  
               </td>
              
           </tr>
@@ -137,7 +169,7 @@ export default function Incidencia (){
    
      </div>
    
-   
+            <ToastContainer />
           </main>
         )}
       </Authenticator>

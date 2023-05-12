@@ -19,6 +19,7 @@ import { I18n } from 'aws-amplify';
 
 import ConductorPerfil from './views/ConductorPerfil';
 import MapView from './components/MapView';
+import AddProfile from './components/AddProfile';
 
 Amplify.configure(config);
 
@@ -44,9 +45,9 @@ I18n.putVocabularies(dict);
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Conductor />} />
+          <Route index element={<Incidencias />} />
           <Route
-            path="/conductor"
+            path="/home"
             element={
               <RequireAuth>
                 <Conductor />
@@ -62,7 +63,18 @@ I18n.putVocabularies(dict);
               </RequireAuth>}/>
                 
 
-         
+              <Route path='conductor/' 
+              element= {
+              <RequireAuth>
+                <Conductor/>
+              </RequireAuth>}/>
+
+              <Route path='conductor/agregar' 
+              element= {
+              <RequireAuth>
+                <AddProfile/>
+              </RequireAuth>}/>
+       
        
           
           <Route
