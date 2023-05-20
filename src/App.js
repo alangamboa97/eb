@@ -20,6 +20,7 @@ import { I18n } from 'aws-amplify';
 import ConductorPerfil from './views/ConductorPerfil';
 import MapView from './components/MapView';
 import AddProfile from './components/AddProfile';
+import RealTimeMap from './components/RealTimeMap';
 
 Amplify.configure(config);
 
@@ -74,7 +75,12 @@ I18n.putVocabularies(dict);
               <RequireAuth>
                 <AddProfile/>
               </RequireAuth>}/>
-       
+                
+              <Route path='conductor/tiemporeal' 
+              element= {
+              <RequireAuth>
+                <RealTimeMap/>
+              </RequireAuth>}/>
        
           
           <Route

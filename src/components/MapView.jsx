@@ -18,6 +18,7 @@ const [incidencia, setIncidencia] = React.useState([]);
 useEffect(()=>{
     fetchIncidencia()
   },[])
+  
   //lee la incidencia de la base de datos
   const fetchIncidencia = async() =>{
     try{
