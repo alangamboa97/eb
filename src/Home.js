@@ -25,14 +25,13 @@ export default function Home() {
         const conductorNombre = conductorData.data.listConductors.items;
         console.log(conductorNombre);
         setConductores(conductorNombre);
-
       }
+
       catch (error){
         console.log('error leyendo datos', error)
 
       }
     }
-    
 
     return (
         <Authenticator>

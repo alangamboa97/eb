@@ -12,7 +12,7 @@ import awsconfig from "../aws-exports";
 
 Amplify.configure(awsconfig);
 
-
+ 
 const mapName = "MayMap";
 const trackerName = "MyTracker";
 const deviceID = "MyDevice";
@@ -51,6 +51,7 @@ const transformRequest = (credentials) => (url, resourceType) => {
 
   function Track(props){
     const handleClick = (event) => {
+
         event.preventDefault();
         props.trackDevice();
     }
@@ -76,7 +77,6 @@ export default function RealTimeMap() {
         {
             longitude: -99.14028,
             latitude: 19.7267,
-
         }
     );
 
@@ -88,7 +88,7 @@ export default function RealTimeMap() {
         };
     
         fetchCredentials();
-    
+        
         const createClient = async () => {
           const credentials = await Auth.currentCredentials();
           const client = new Location({
@@ -127,7 +127,7 @@ export default function RealTimeMap() {
                 long: devPos.Position[0],
                 lat: devPos.Position[1]
               } 
-              
+
             });
     
             setDevPosMarkers(tempPosMarkers);
@@ -163,7 +163,7 @@ export default function RealTimeMap() {
             height="100vh"
             transformRequest={transformRequest(credentials)}
             mapStyle={mapName}
-            onViewportChange={setViewport}w
+            onViewportChange={setViewport}
           >
             <Marker
               longitude={marker.longitude}
@@ -172,7 +172,7 @@ export default function RealTimeMap() {
               offsetLeft={-10}
             > 
             <Pin size={20}/>
-            </Marker>
+              </Marker>
 
             {trackerMarkers}
 

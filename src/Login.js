@@ -15,6 +15,8 @@ export function Login() {
   }, [route, navigate, from]);
   return (
     <div className="flex items-left">
+
+    
     <View className="auth-wrapper">
       
       <Authenticator></Authenticator>
