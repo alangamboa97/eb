@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Amplify, Auth } from "aws-amplify";
-import mapboxgl from "mapbox-gl";
-import ReactMapGL, {
-  Marker,
-  Popup,
-  NavigationControl,
-  Source,
-  Layer,
-} from "react-map-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import Pin from "../components/Pin";
+import { Map, MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 import useInterval from "../UseInterval";
 import Location from "aws-sdk/clients/location";
 import { createRequestTransformer } from "amazon-location-helpers";
 import { Signer } from "@aws-amplify/core";
 import awsconfig from "../aws-exports";
-import "mapbox-gl/dist/mapbox-gl.css";
+import "leaflet/dist/leaflet.css";
 
 Amplify.configure(awsconfig);
 
@@ -24,8 +17,6 @@ const mapName = "MyMap";
 const identityPoolId = "admins";
 const trackerName = "MyTracker";
 const deviceID = "MyDevice";
-mapboxgl.accessToken =
-  "pk.eyJ1IjoiYWxhbmdhbWJvYTk3IiwiYSI6ImNsaHpsN3V0dzBlcDUzcW9jbmtjamZlOXoifQ.Z6J6EiCNlFcBSHY0KnFc_A";
 
 const INITIAL_VIEW_STATE = {
   longitude: -99.14028,
@@ -136,6 +127,7 @@ export default function RealTimeMap() {
           index
         ) {
           console.log(devPos.Position[0], devPos.Position[1]);
+
           return {
             index: index,
             long: devPos.Position[0],
@@ -173,23 +165,17 @@ export default function RealTimeMap() {
       </div>
       <br />
       <div>
-        {credentials ? (
-          <ReactMapGL
-            {...viewport}
-            width="100%"
-            height="400px"
-            transformRequest={transformRequest(credentials)}
-            // mapStyle={mapName}
-            onViewportChange={setViewport}
-            mapboxAccessToken={mapboxgl.accessToken}
-          >
-            <div style={{ position: "absolute", left: 20, top: 20 }}>
-              <NavigationControl showCompass={false} />
-            </div>
-          </ReactMapGL>
-        ) : (
-          <h1>Loading...</h1>
-        )}
+        <MapContainer
+          center={[19.468725, -99.1345574]}
+          zoom={13}
+          style={{ height: 400, width: 700 }}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={[19.468725, -99.1345574]}></Marker>
+        </MapContainer>
       </div>
     </main>
   );
