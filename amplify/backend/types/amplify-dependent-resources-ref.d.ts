@@ -26,6 +26,14 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     }
   },
+  "geo": {
+    "Map": {
+      "Arn": "string",
+      "Name": "string",
+      "Region": "string",
+      "Style": "string"
+    }
+  },
   "storage": {
     "videos": {
       "BucketName": "string",

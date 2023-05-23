@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Amplify, Auth } from "aws-amplify";
-
+import mapboxgl from "mapbox-gl";
 import ReactMapGL, {
   Marker,
   Popup,
@@ -16,13 +16,16 @@ import Location from "aws-sdk/clients/location";
 import { createRequestTransformer } from "amazon-location-helpers";
 import { Signer } from "@aws-amplify/core";
 import awsconfig from "../aws-exports";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 Amplify.configure(awsconfig);
 
-const mapName = "MayMap";
+const mapName = "MyMap";
 const identityPoolId = "admins";
 const trackerName = "MyTracker";
 const deviceID = "MyDevice";
+mapboxgl.accessToken =
+  "pk.eyJ1IjoiYWxhbmdhbWJvYTk3IiwiYSI6ImNsaHpsN3V0dzBlcDUzcW9jbmtjamZlOXoifQ.Z6J6EiCNlFcBSHY0KnFc_A";
 
 const INITIAL_VIEW_STATE = {
   longitude: -99.14028,
@@ -77,7 +80,11 @@ function Track(props) {
 export default function RealTimeMap() {
   const [credentials, setCredentials] = useState();
   //const [transformRequest, setRequestTransformer] = useState();
-  const [viewport, setViewport] = useState(INITIAL_VIEW_STATE);
+  const [viewport, setViewport] = useState({
+    longitude: -99.14028,
+    latitude: 19.7267,
+    zoom: 10,
+  });
   const [client, setClient] = useState(null);
 
   const [marker, setMarker] = useState({
@@ -170,22 +177,12 @@ export default function RealTimeMap() {
           <ReactMapGL
             {...viewport}
             width="100%"
-            height="100vh"
+            height="400px"
             transformRequest={transformRequest(credentials)}
-            mapStyle={mapName}
+            // mapStyle={mapName}
             onViewportChange={setViewport}
+            mapboxAccessToken={mapboxgl.accessToken}
           >
-            <Marker
-              longitude={marker.longitude}
-              latitude={marker.latitude}
-              offsetTop={-20}
-              offsetLeft={-10}
-            >
-              <Pin size={20} />
-            </Marker>
-
-            {trackerMarkers}
-
             <div style={{ position: "absolute", left: 20, top: 20 }}>
               <NavigationControl showCompass={false} />
             </div>
