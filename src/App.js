@@ -1,47 +1,42 @@
-import React, {useEffect, useState} from 'react';
-import { Amplify,API} from 'aws-amplify';
-import config from './aws-exports'; 
-import { Authenticator} from '@aws-amplify/ui-react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { RequireAuth } from './RequireAuth';
-import './App.css';
-import Home from './Home';
-import Conductor from './views/Conductor';
-import Incidencias from './views/Incidencias';
-import Ubicacion from './views/Ubicacion';
-import Incidencia from './components/Incidencia';
-import { Layout } from './Layout';
-import { Login } from './Login';
-import '@aws-amplify/ui-react/styles.css';
+import React, { useEffect, useState } from "react";
+import { Amplify, API } from "aws-amplify";
+import config from "./aws-exports";
+import { Authenticator } from "@aws-amplify/ui-react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { RequireAuth } from "./RequireAuth";
+import "./App.css";
+import Home from "./Home";
+import Conductor from "./views/Conductor";
+import Incidencias from "./views/Incidencias";
+import Ubicacion from "./views/Ubicacion";
+import Incidencia from "./components/Incidencia";
+import { Layout } from "./Layout";
+import { Login } from "./Login";
+import "@aws-amplify/ui-react/styles.css";
 
+import { I18n } from "aws-amplify";
 
-import { I18n } from 'aws-amplify';
-
-import ConductorPerfil from './views/ConductorPerfil';
-import MapView from './components/MapView';
-import AddProfile from './components/AddProfile';
-import RealTimeMap from './components/RealTimeMap';
+import ConductorPerfil from "./views/ConductorPerfil";
+import MapView from "./components/MapView";
+import AddProfile from "./components/AddProfile";
+import RealTimeMap from "./components/RealTimeMap";
 
 Amplify.configure(config);
 
-I18n.setLanguage('es'); 
+I18n.setLanguage("es");
 const dict = {
- 
   es: {
-    'Sign In': 'Registrarse',
-    'Create Account': 'Regístrate',
-    'Enter your Email': 'Ingresa tu Email',
-    'Password': 'Contraseña',
-    'Enter your Password':'Ingresa tu Contraseña',
-    
-
-  }
+    "Sign In": "Registrarse",
+    "Create Account": "Regístrate",
+    "Enter your Email": "Ingresa tu Email",
+    Password: "Contraseña",
+    "Enter your Password": "Ingresa tu Contraseña",
+  },
 };
 
 I18n.putVocabularies(dict);
 
-
- export function MyRoutes(){
+export function MyRoutes() {
   return (
     <BrowserRouter>
       <Routes>
@@ -53,36 +48,44 @@ I18n.putVocabularies(dict);
               <RequireAuth>
                 <Conductor />
               </RequireAuth>
-              
-            }>
-               
-          </Route>
-          <Route path='conductor/:id' 
-              element= {
+            }
+          ></Route>
+          <Route
+            path="conductor/:id"
+            element={
               <RequireAuth>
-                <ConductorPerfil/>
-              </RequireAuth>}/>
-                
+                <ConductorPerfil />
+              </RequireAuth>
+            }
+          />
 
-              <Route path='conductor/' 
-              element= {
+          <Route
+            path="conductor/"
+            element={
               <RequireAuth>
-                <Conductor/>
-              </RequireAuth>}/>
+                <Conductor />
+              </RequireAuth>
+            }
+          />
 
-              <Route path='conductor/agregar' 
-              element= {
+          <Route
+            path="conductor/agregar"
+            element={
               <RequireAuth>
-                <AddProfile/>
-              </RequireAuth>}/>
-                
-              <Route path='conductor/tiemporeal' 
-              element= {
+                <AddProfile />
+              </RequireAuth>
+            }
+          />
+
+          <Route
+            path="conductor/tiemporeal"
+            element={
               <RequireAuth>
-                <RealTimeMap/>
-              </RequireAuth>}/>
-       
-          
+                <RealTimeMap />
+              </RequireAuth>
+            }
+          />
+
           <Route
             path="/incidencias"
             element={
@@ -90,9 +93,8 @@ I18n.putVocabularies(dict);
                 <Incidencias />
               </RequireAuth>
             }
-            
           />
-           <Route
+          <Route
             path="/incidencias/:id"
             element={
               <RequireAuth>
@@ -109,7 +111,7 @@ I18n.putVocabularies(dict);
             }
           />
 
-        <Route
+          <Route
             path="/ubicacion"
             element={
               <RequireAuth>
@@ -117,26 +119,20 @@ I18n.putVocabularies(dict);
               </RequireAuth>
             }
           />
-         
+
           <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
     </BrowserRouter>
   );
-
 }
 
+function App() {
+  return (
+    <Authenticator.Provider>
+      <MyRoutes />
+    </Authenticator.Provider>
+  );
+}
 
-
-
-  function App() {
-    return (
-      <Authenticator.Provider>
-        <MyRoutes />
-      </Authenticator.Provider>
-    );
-  }
-  
 export default App;
-
-
