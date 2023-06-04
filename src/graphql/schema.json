@@ -203,7 +203,18 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
-          "name" : "fecha_hora",
+          "name" : "fecha",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "hora",
           "description" : null,
           "args" : [ ],
           "type" : {
@@ -488,7 +499,16 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "fecha_hora",
+          "name" : "fecha",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelStringInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "hora",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -1492,7 +1512,16 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "fecha_hora",
+          "name" : "fecha",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "hora",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -1546,7 +1575,16 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "fecha_hora",
+          "name" : "fecha",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelStringInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "hora",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -1648,7 +1686,16 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "fecha_hora",
+          "name" : "fecha",
+          "description" : null,
+          "type" : {
+            "kind" : "SCALAR",
+            "name" : "String",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "hora",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -2049,7 +2096,16 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "fecha_hora",
+          "name" : "fecha",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelSubscriptionStringInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "hora",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",

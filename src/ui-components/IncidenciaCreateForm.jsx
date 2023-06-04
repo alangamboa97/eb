@@ -32,25 +32,29 @@ export default function IncidenciaCreateForm(props) {
     estado: false,
     url_video: "",
     ubicacion: "",
-    fecha_hora: "",
+    fecha: "",
+    hora: "",
   };
   const [estado, setEstado] = React.useState(initialValues.estado);
   const [url_video, setUrl_video] = React.useState(initialValues.url_video);
   const [ubicacion, setUbicacion] = React.useState(initialValues.ubicacion);
-  const [fecha_hora, setFecha_hora] = React.useState(initialValues.fecha_hora);
+  const [fecha, setFecha] = React.useState(initialValues.fecha);
+  const [hora, setHora] = React.useState(initialValues.hora);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setEstado(initialValues.estado);
     setUrl_video(initialValues.url_video);
     setUbicacion(initialValues.ubicacion);
-    setFecha_hora(initialValues.fecha_hora);
+    setFecha(initialValues.fecha);
+    setHora(initialValues.hora);
     setErrors({});
   };
   const validations = {
     estado: [],
     url_video: [],
     ubicacion: [],
-    fecha_hora: [],
+    fecha: [],
+    hora: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -81,7 +85,8 @@ export default function IncidenciaCreateForm(props) {
           estado,
           url_video,
           ubicacion,
-          fecha_hora,
+          fecha,
+          hora,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -139,7 +144,8 @@ export default function IncidenciaCreateForm(props) {
               estado: value,
               url_video,
               ubicacion,
-              fecha_hora,
+              fecha,
+              hora,
             };
             const result = onChange(modelFields);
             value = result?.estado ?? value;
@@ -166,7 +172,8 @@ export default function IncidenciaCreateForm(props) {
               estado,
               url_video: value,
               ubicacion,
-              fecha_hora,
+              fecha,
+              hora,
             };
             const result = onChange(modelFields);
             value = result?.url_video ?? value;
@@ -193,7 +200,8 @@ export default function IncidenciaCreateForm(props) {
               estado,
               url_video,
               ubicacion: value,
-              fecha_hora,
+              fecha,
+              hora,
             };
             const result = onChange(modelFields);
             value = result?.ubicacion ?? value;
@@ -209,10 +217,10 @@ export default function IncidenciaCreateForm(props) {
         {...getOverrideProps(overrides, "ubicacion")}
       ></TextField>
       <TextField
-        label="Fecha hora"
+        label="Fecha"
         isRequired={false}
         isReadOnly={false}
-        value={fecha_hora}
+        value={fecha}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -220,20 +228,49 @@ export default function IncidenciaCreateForm(props) {
               estado,
               url_video,
               ubicacion,
-              fecha_hora: value,
+              fecha: value,
+              hora,
             };
             const result = onChange(modelFields);
-            value = result?.fecha_hora ?? value;
+            value = result?.fecha ?? value;
           }
-          if (errors.fecha_hora?.hasError) {
-            runValidationTasks("fecha_hora", value);
+          if (errors.fecha?.hasError) {
+            runValidationTasks("fecha", value);
           }
-          setFecha_hora(value);
+          setFecha(value);
         }}
-        onBlur={() => runValidationTasks("fecha_hora", fecha_hora)}
-        errorMessage={errors.fecha_hora?.errorMessage}
-        hasError={errors.fecha_hora?.hasError}
-        {...getOverrideProps(overrides, "fecha_hora")}
+        onBlur={() => runValidationTasks("fecha", fecha)}
+        errorMessage={errors.fecha?.errorMessage}
+        hasError={errors.fecha?.hasError}
+        {...getOverrideProps(overrides, "fecha")}
+      ></TextField>
+      <TextField
+        label="Hora"
+        isRequired={false}
+        isReadOnly={false}
+        value={hora}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              estado,
+              url_video,
+              ubicacion,
+              fecha,
+              hora: value,
+            };
+            const result = onChange(modelFields);
+            value = result?.hora ?? value;
+          }
+          if (errors.hora?.hasError) {
+            runValidationTasks("hora", value);
+          }
+          setHora(value);
+        }}
+        onBlur={() => runValidationTasks("hora", hora)}
+        errorMessage={errors.hora?.errorMessage}
+        hasError={errors.hora?.hasError}
+        {...getOverrideProps(overrides, "hora")}
       ></TextField>
       <Flex
         justifyContent="space-between"

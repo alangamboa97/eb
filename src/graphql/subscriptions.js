@@ -21,7 +21,8 @@ export const onCreateIncidencia = /* GraphQL */ `
       estado
       url_video
       ubicacion
-      fecha_hora
+      fecha
+      hora
       createdAt
       updatedAt
       conductorIncidenciasId
@@ -48,7 +49,8 @@ export const onUpdateIncidencia = /* GraphQL */ `
       estado
       url_video
       ubicacion
-      fecha_hora
+      fecha
+      hora
       createdAt
       updatedAt
       conductorIncidenciasId
@@ -75,7 +77,8 @@ export const onDeleteIncidencia = /* GraphQL */ `
       estado
       url_video
       ubicacion
-      fecha_hora
+      fecha
+      hora
       createdAt
       updatedAt
       conductorIncidenciasId
@@ -96,7 +99,8 @@ export const onCreateConductor = /* GraphQL */ `
           estado
           url_video
           ubicacion
-          fecha_hora
+          fecha
+          hora
           createdAt
           updatedAt
           conductorIncidenciasId
@@ -123,7 +127,8 @@ export const onUpdateConductor = /* GraphQL */ `
           estado
           url_video
           ubicacion
-          fecha_hora
+          fecha
+          hora
           createdAt
           updatedAt
           conductorIncidenciasId
@@ -150,7 +155,8 @@ export const onDeleteConductor = /* GraphQL */ `
           estado
           url_video
           ubicacion
-          fecha_hora
+          fecha
+          hora
           createdAt
           updatedAt
           conductorIncidenciasId

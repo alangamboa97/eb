@@ -7,13 +7,17 @@ import ReactPlayer from "react-player";
 import { updateIncidencia } from "../graphql/mutations";
 import { Link } from "react-router-dom";
 import MapView from "./MapView";
+import Spinner from "./Spinner";
 export default function Incidencias() {
   const { id } = useParams();
   const [incidencia, setIncidencia] = React.useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [conductor, setConductor] = React.useState([]);
 
   useEffect(() => {
     fetchIncidencia();
+    setLoading(false);
   }, []);
   //lee la incidencia de la base de datos
   const fetchIncidencia = async () => {
@@ -60,10 +64,6 @@ export default function Incidencias() {
     }
   };
 
-  const pendiente = "Pendiente";
-  const confirmar = "Confirmada";
-  const rechazada = "Rechazada";
-
   function confirmarEstado(incidencia) {
     if (incidencia === null) {
       return (
@@ -91,8 +91,8 @@ export default function Incidencias() {
   const hora = new Date(incidencia.createdAt).toLocaleTimeString();
   console.log(fecha);
   return (
-    <div class="p-10">
-      <div class="p-8 bg-white shadow mt-10">
+    <div class="p-10 bg-slate-50">
+      <div class="p-8 bg-white shadow mt-10 border-black rounded-lg">
         <div class="grid grid-cols-1 md:grid-cols-3">
           <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
             <div></div>

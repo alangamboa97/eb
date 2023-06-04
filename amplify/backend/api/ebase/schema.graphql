@@ -12,7 +12,8 @@ type Incidencia
   estado: Boolean
   url_video: String
   ubicacion: String
-  fecha_hora: String
+  fecha: String
+  hora: String
 }
 
 type Conductor

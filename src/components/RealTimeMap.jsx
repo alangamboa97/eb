@@ -174,7 +174,7 @@ export default function RealTimeMap() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={[19.468725, -99.1345574]}></Marker>
+          <Marker position={trackerMarkers}></Marker>
         </MapContainer>
       </div>
     </main>

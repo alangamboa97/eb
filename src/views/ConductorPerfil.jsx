@@ -59,19 +59,31 @@ export default function ConductorPerfil() {
 
   function confirmarEstado(incidencia) {
     if (incidencia === null) {
-      return pendiente;
+      return (
+        <span class="bg-blue-100 text-blue-800 text-l font-large mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+          Pendiente
+        </span>
+      );
     }
     if (incidencia === true) {
-      return confirmar;
+      return (
+        <span class="bg-green-100 text-green-800 text-l font-large mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+          Confirmada
+        </span>
+      );
     } else {
-      return rechazada;
+      return (
+        <span class="bg-red-100 text-red-800 text-l font-large mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">
+          Rechazada
+        </span>
+      );
     }
   }
 
   return (
     <main>
-      <div class="p-16">
-        <div class="p-8 bg-white shadow mt-24">
+      <div class="p-16 bg-">
+        <div class="p-8 bg-slate-200 shadow mt-24">
           <div class="grid grid-cols-1 md:grid-cols-3">
             <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0"></div>
             <div class="relative">
@@ -112,14 +124,14 @@ export default function ConductorPerfil() {
             <br></br>
             <div>
               <p class="text-gray-400">Incidencias</p>
-              <p class="font-bold text-gray-700 text-xl">{num}</p>
+              <p class="font-bold text-blue-700 text-xl">{num}</p>
             </div>
           </div>
 
-          <div class="mt-12 flex flex-col justify-center">
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div class="relative overflow-x-auto">
               <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead class="text-xs text-white uppercase bg-black dark:bg-gray-700 dark:text-gray-400">
                   <tr>
                     <th scope="col" class="px-6 py-3">
                       ID

@@ -19,7 +19,8 @@ export const getIncidencia = /* GraphQL */ `
       estado
       url_video
       ubicacion
-      fecha_hora
+      fecha
+      hora
       createdAt
       updatedAt
       conductorIncidenciasId
@@ -46,7 +47,8 @@ export const listIncidencias = /* GraphQL */ `
         estado
         url_video
         ubicacion
-        fecha_hora
+        fecha
+        hora
         createdAt
         updatedAt
         conductorIncidenciasId
@@ -67,7 +69,8 @@ export const getConductor = /* GraphQL */ `
           estado
           url_video
           ubicacion
-          fecha_hora
+          fecha
+          hora
           createdAt
           updatedAt
           conductorIncidenciasId

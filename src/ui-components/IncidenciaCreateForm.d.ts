@@ -16,13 +16,15 @@ export declare type IncidenciaCreateFormInputValues = {
     estado?: boolean;
     url_video?: string;
     ubicacion?: string;
-    fecha_hora?: string;
+    fecha?: string;
+    hora?: string;
 };
 export declare type IncidenciaCreateFormValidationValues = {
     estado?: ValidationFunction<boolean>;
     url_video?: ValidationFunction<string>;
     ubicacion?: ValidationFunction<string>;
-    fecha_hora?: ValidationFunction<string>;
+    fecha?: ValidationFunction<string>;
+    hora?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type IncidenciaCreateFormOverridesProps = {
@@ -30,7 +32,8 @@ export declare type IncidenciaCreateFormOverridesProps = {
     estado?: PrimitiveOverrideProps<SwitchFieldProps>;
     url_video?: PrimitiveOverrideProps<TextFieldProps>;
     ubicacion?: PrimitiveOverrideProps<TextFieldProps>;
-    fecha_hora?: PrimitiveOverrideProps<TextFieldProps>;
+    fecha?: PrimitiveOverrideProps<TextFieldProps>;
+    hora?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type IncidenciaCreateFormProps = React.PropsWithChildren<{
     overrides?: IncidenciaCreateFormOverridesProps | undefined | null;
