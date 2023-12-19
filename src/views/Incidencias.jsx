@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { listIncidencias } from "../graphql/queries";
 import { onCreateIncidencia } from "../graphql/subscriptions";
 import { ToastContainer, toast } from "react-toastify";
+
 import Spinner from "../components/Spinner";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
@@ -117,7 +118,7 @@ export default function Incidencia() {
     // Crear un objeto para almacenar el recuento de incidencias por día
     const incidenciasPorDia = {
       Lunes: 0,
-      Martes: 2,
+      Martes: 0,
       Miércoles: 0,
       Jueves: 0,
       Viernes: 0,
@@ -125,18 +126,30 @@ export default function Incidencia() {
       Domingo: 0,
     };
 
+    // Crear un array para mapear los números de los días de la semana a sus nombres en español
+    const diasSemana = [
+      "Domingo",
+      "Lunes",
+      "Martes",
+      "Miércoles",
+      "Jueves",
+      "Viernes",
+      "Sábado",
+    ];
+
     // Procesar cada incidencia y contar por día
     incidenciasporSemana.forEach((incidencia) => {
       // Obtener la fecha de la incidencia (asumiendo que hay una propiedad "fecha")
       const fecha = new Date(incidencia.fecha);
       // Obtener el día de la semana (0: Domingo, 1: Lunes, ..., 6: Sábado)
       const diaSemana = fecha.getDay();
-      incidenciasPorDia[diaSemana]++;
+      // Incrementar el recuento de incidencias para el día correspondiente
+      incidenciasPorDia[diasSemana[diaSemana]]++;
     });
-    console.log(" Incidencias por día", incidenciasPorDia);
+
+    console.log("Incidencias por día:", incidenciasPorDia);
     return incidenciasPorDia;
   };
-
   const obtenerIncidenciasDia = async () => {
     try {
       const currentDate = new Date().toISOString().split("T")[0];
@@ -327,29 +340,31 @@ export default function Incidencia() {
                     </tr>
                   </thead>
                   <tbody>
-                    {incidencias.map((incidencia) => (
-                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th
-                          scope="row"
-                          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                        >
-                          <Link to={`/incidencias/${incidencia.id}`}>
-                            {incidencia.id}
-                          </Link>
-                        </th>
-                        <td class="px-6 py-4">
-                          {" "}
-                          {incidencia.conductor.nombre}{" "}
-                          {incidencia.conductor.apellido}{" "}
-                        </td>
-                        <td class="px-6 py-4">
-                          {incidencia.fecha} {incidencia.hora}
-                        </td>
-                        <td class="px-6 py-4">
-                          {confirmarEstado(incidencia.estado)}
-                        </td>
-                      </tr>
-                    ))}
+                    {incidencias
+                      .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
+                      .map((incidencia) => (
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                          <th
+                            scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                          >
+                            <Link to={`/incidencias/${incidencia.id}`}>
+                              {incidencia.id}
+                            </Link>
+                          </th>
+                          <td class="px-6 py-4">
+                            {" "}
+                            {incidencia.conductor.nombre}{" "}
+                            {incidencia.conductor.apellido}{" "}
+                          </td>
+                          <td class="px-6 py-4">
+                            {incidencia.fecha} {incidencia.hora}
+                          </td>
+                          <td class="px-6 py-4">
+                            {confirmarEstado(incidencia.estado)}
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </div>

@@ -14,7 +14,7 @@ export default function ConductorPerfil() {
   const [conductor, setConductor] = useState([]);
   const [incidencias, setIncidencia] = React.useState([]);
   const [show, setShow] = useState(false);
-
+  const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -22,6 +22,15 @@ export default function ConductorPerfil() {
     fetchCoductor();
   }, []);
   //lee los conductores de la base de datos
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   const fetchCoductor = async () => {
     try {
       const conductorData = await API.graphql(
@@ -108,7 +117,7 @@ export default function ConductorPerfil() {
                 Editar
               </button>
               <button
-                onClick={handleShow}
+                onClick={openModal}
                 class="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
               >
                 Eliminar

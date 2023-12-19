@@ -3,13 +3,14 @@ import { Amplify, Auth } from "aws-amplify";
 import "maplibre-gl/dist/maplibre-gl.css";
 import Pin from "../components/Pin";
 import { Map, MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-
+import markerIcon from "../images/marker.png";
 import useInterval from "../UseInterval";
 import Location from "aws-sdk/clients/location";
 import { createRequestTransformer } from "amazon-location-helpers";
 import { Signer } from "@aws-amplify/core";
 import awsconfig from "../aws-exports";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 
 Amplify.configure(awsconfig);
 
@@ -23,6 +24,13 @@ const INITIAL_VIEW_STATE = {
   latitude: 19.7267,
   zoom: 10,
 };
+
+const CustomMarkerIcon = L.icon({
+  iconUrl: markerIcon, // Ruta al icono personalizado
+  iconSize: [25, 41], // Tamaño del icono
+  iconAnchor: [12, 41], // Punto de anclaje del icono
+  popupAnchor: [0, -41], // Punto de anclaje del popup
+});
 
 const transformRequest = (credentials) => (url, resourceType) => {
   // Resolve to an AWS URL
@@ -105,7 +113,7 @@ export default function RealTimeMap() {
   }, []);
 
   useInterval(() => {
-    getDevicePosition();
+    //getDevicePosition();
   }, 10000);
 
   const getDevicePosition = () => {
@@ -166,15 +174,15 @@ export default function RealTimeMap() {
       <br />
       <div>
         <MapContainer
-          center={[19.468725, -99.1345574]}
-          zoom={13}
-          style={{ height: 400, width: 700 }}
+          center={[19.42847, -99.12766]}
+          zoom={18}
+          style={{ height: "100vh", width: "100%" }}
         >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Marker position={trackerMarkers}></Marker>
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+          <Marker position={[19.42847, -99.12766]} icon={CustomMarkerIcon}>
+            {/* Contenido del popup */}
+          </Marker>
         </MapContainer>
       </div>
     </main>

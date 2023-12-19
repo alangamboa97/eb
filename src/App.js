@@ -20,6 +20,7 @@ import ConductorPerfil from "./views/ConductorPerfil";
 import MapView from "./components/MapView";
 import AddProfile from "./components/AddProfile";
 import RealTimeMap from "./components/RealTimeMap";
+import AgregarConductor from "./components/AgregarConductor";
 
 Amplify.configure(config);
 
@@ -85,7 +86,14 @@ export function MyRoutes() {
               </RequireAuth>
             }
           />
-
+          <Route
+            path="/agregarConductor"
+            element={
+              <RequireAuth>
+                <AgregarConductor />
+              </RequireAuth>
+            }
+          />
           <Route
             path="/incidencias"
             element={

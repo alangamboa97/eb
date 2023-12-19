@@ -96,7 +96,7 @@ export function Layout() {
                       <span class="sr-only">Open user menu</span>
                       <img
                         class="w-8 h-8 rounded-full"
-                        src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                        src=""
                         alt="user photo"
                       ></img>
                     </button>
@@ -257,7 +257,7 @@ export function Layout() {
                   </svg>
 
                   <span class="flex-1 ml-3 whitespace-nowrap" onClick={signOut}>
-                    Sign In
+                    Cerrar Sesión
                   </span>
                 </a>
               </li>

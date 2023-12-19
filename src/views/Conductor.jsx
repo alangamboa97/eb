@@ -1,6 +1,7 @@
 import { useAuthenticator, Authenticator } from "@aws-amplify/ui-react";
 import { API, graphqlOperation } from "aws-amplify";
 import { useState, useEffect } from "react";
+import { AgregarConductor } from "../components/AgregarConductor";
 import { listConductors } from "../graphql/queries";
 import { Link } from "react-router-dom";
 
@@ -94,6 +95,9 @@ export default function Conductor() {
               </table>
             </div>
           </div>
+          <button class="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+            <Link to="/agregarConductor">Agregar Conductor</Link>
+          </button>
         </main>
       )}
     </Authenticator>
