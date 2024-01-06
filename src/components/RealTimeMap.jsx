@@ -117,6 +117,7 @@ export default function RealTimeMap() {
   }, 10000);
 
   const getDevicePosition = () => {
+    // Eliminar esta línea que limpia los marcadores cada vez que se llama a la función
     setDevPosMarkers([]);
 
     var params = {
@@ -128,13 +129,12 @@ export default function RealTimeMap() {
 
     client.getDevicePositionHistory(params, (err, data) => {
       if (err) console.log(err, err.stack);
-      if (data) {
-        console.log(data);
+      if (data && data.DevicePositions && data.DevicePositions.length > 0) {
         const tempPosMarkers = data.DevicePositions.map(function (
           devPos,
           index
         ) {
-          console.log(devPos.Position[0], devPos.Position[1]);
+          console.log("Posicion: ", devPos.Position[0], devPos.Position[1]);
 
           return {
             index: index,
@@ -152,6 +152,10 @@ export default function RealTimeMap() {
           latitude: tempPosMarkers[pos].lat,
           zoom: 5,
         });
+      } else {
+        // Si no se reciben coordenadas, mantener la vista inicial
+        setViewport(INITIAL_VIEW_STATE);
+        console.log("No se han recibido coordenadas del dispositivo.");
       }
     });
   };
