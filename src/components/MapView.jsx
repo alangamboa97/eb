@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { API } from "aws-amplify";
 import { graphqlOperation } from "aws-amplify";
+import markerIcon from "../images/marker.png";
 import { getIncidencia } from "../graphql/queries";
 import { useParams } from "react-router-dom";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
@@ -10,10 +11,10 @@ import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
 let DefaultIcon = L.icon({
-  iconUrl: icon,
-  shadowUrl: iconShadow,
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
+  iconUrl: markerIcon, // Ruta al icono personalizado
+  iconSize: [50, 50], // Tamaño del icono
+  iconAnchor: [25, 45], // Punto de anclaje del icono
+  popupAnchor: [0, -41], // Punto de anclaje del popup
 });
 
 L.Marker.prototype.options.icon = DefaultIcon;
@@ -46,7 +47,7 @@ export default function MapView() {
   return (
     <MapContainer
       center={ubicacion}
-      zoom={13}
+      zoom={16}
       style={{ height: 400, width: 700 }}
     >
       <TileLayer

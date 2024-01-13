@@ -195,7 +195,6 @@ export default function Incidencia() {
     fetchIncidencias();
     obtenerIncidenciasSemana();
     obtenerIncidenciasDia();
-
     calcularIncidenciasPorDia();
   }, [nuevaIncidencia]);
 

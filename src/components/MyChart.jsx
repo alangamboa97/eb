@@ -13,7 +13,7 @@ const MyChart = ({ data }) => {
         labels: Object.keys(data),
         datasets: [
           {
-            label: "Incidencias por día",
+            label: "",
             data: Object.values(data),
             backgroundColor: "rgba(75, 192, 192, 0.6)",
           },

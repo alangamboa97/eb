@@ -145,10 +145,6 @@ export default function Incidencias() {
 
         <div class="mt-12 flex flex-col justify-right">
           <p class="text-gray-600 text-right font-light lg:px-16">
-            An artist of considerable range, Ryan — the name taken by
-            Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and
-            records all of his own music, giving it a warm, intimate feel with a
-            solid groove structure. An artist of considerable range.
             <MapView></MapView>
           </p>
         </div>

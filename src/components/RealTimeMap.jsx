@@ -27,8 +27,8 @@ const INITIAL_VIEW_STATE = {
 
 const CustomMarkerIcon = L.icon({
   iconUrl: markerIcon, // Ruta al icono personalizado
-  iconSize: [25, 41], // Tamaño del icono
-  iconAnchor: [12, 41], // Punto de anclaje del icono
+  iconSize: [50, 50], // Tamaño del icono
+  iconAnchor: [25, 45], // Punto de anclaje del icono
   popupAnchor: [0, -41], // Punto de anclaje del popup
 });
 
@@ -118,7 +118,7 @@ export default function RealTimeMap() {
 
   const getDevicePosition = () => {
     // Eliminar esta línea que limpia los marcadores cada vez que se llama a la función
-    setDevPosMarkers([]);
+    //setDevPosMarkers([]);
 
     var params = {
       DeviceId: deviceID,
@@ -130,30 +130,29 @@ export default function RealTimeMap() {
     client.getDevicePositionHistory(params, (err, data) => {
       if (err) console.log(err, err.stack);
       if (data && data.DevicePositions && data.DevicePositions.length > 0) {
-        const tempPosMarkers = data.DevicePositions.map(function (
-          devPos,
-          index
-        ) {
-          console.log("Posicion: ", devPos.Position[0], devPos.Position[1]);
+        const latestPosition =
+          data.DevicePositions[data.DevicePositions.length - 1];
 
-          return {
-            index: index,
-            long: devPos.Position[0],
-            lat: devPos.Position[1],
-          };
-        });
+        console.log(
+          "Posicion: ",
+          latestPosition.Position[0],
+          latestPosition.Position[1]
+        );
 
-        setDevPosMarkers(tempPosMarkers);
+        const newPosition = {
+          longitude: latestPosition.Position[0],
+          latitude: latestPosition.Position[1],
+        };
 
-        const pos = tempPosMarkers.length - 1;
+        setMarker(newPosition);
 
         setViewport({
-          longitude: tempPosMarkers[pos].long,
-          latitude: tempPosMarkers[pos].lat,
+          longitude: newPosition.longitude,
+          latitude: newPosition.latitude,
           zoom: 5,
         });
       } else {
-        // Si no se reciben coordenadas, mantener la vista inicial
+        // Si no se reciben coordenadas, mantener la vista inicial y la última posición conocida
         setViewport(INITIAL_VIEW_STATE);
         console.log("No se han recibido coordenadas del dispositivo.");
       }
@@ -172,19 +171,30 @@ export default function RealTimeMap() {
 
   return (
     <main>
-      <div>
-        <Track trackDevice={getDevicePosition} />
-      </div>
       <br />
-      <div>
+      <br />
+      <br />
+      <div style={{ height: "80vh", overflowY: "scroll" }}>
+        <div>
+          <button
+            onClick={getDevicePosition}
+            class="text-white py-2 px-4 uppercase rounded bg-green-400 hover:bg-green-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+          >
+            Actualizar
+          </button>
+        </div>
+        <br />
         <MapContainer
-          center={[19.42847, -99.12766]}
-          zoom={18}
-          style={{ height: "100vh", width: "100%" }}
+          center={[viewport.latitude, viewport.longitude]}
+          zoom={16}
+          style={{ height: "80vh", width: "100%" }}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-          <Marker position={[19.42847, -99.12766]} icon={CustomMarkerIcon}>
+          <Marker
+            position={[marker.latitude, marker.longitude]}
+            icon={CustomMarkerIcon}
+          >
             {/* Contenido del popup */}
           </Marker>
         </MapContainer>

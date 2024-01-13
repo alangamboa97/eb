@@ -122,6 +122,11 @@ export default function ConductorPerfil() {
               >
                 Eliminar
               </button>
+              <Link to="/conductor/tiemporeal">
+                <button class="text-white py-2 px-4 uppercase rounded bg-green-400 hover:bg-green-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+                  Ubicación en Tiempo Real
+                </button>
+              </Link>
             </div>
           </div>
 
