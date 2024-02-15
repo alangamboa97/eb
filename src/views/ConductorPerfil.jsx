@@ -6,7 +6,10 @@ import { API, graphqlOperation } from "aws-amplify";
 import { deleteConductor } from "../graphql/mutations";
 import ModalDelete from "../components/ModalDelete";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+
 import { Modal } from "react-bootstrap";
+import { convertNeSwToNwSe } from "google-map-react";
 
 export default function ConductorPerfil() {
   const { id } = useParams();
@@ -17,6 +20,7 @@ export default function ConductorPerfil() {
   const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchCoductor();
@@ -48,12 +52,12 @@ export default function ConductorPerfil() {
 
   const eliminarConductor = async () => {
     try {
-      const conductorData = await API.graphql(
+      await API.graphql(
         graphqlOperation(deleteConductor, { input: { id: id } })
       );
-      const conductorPerfil = conductorData.data.deleteConductor;
-      setConductor(conductorPerfil);
-      console.log("Conductor", conductorPerfil);
+      console.log("Conductor eliminado con éxito");
+      // Redirige a la dirección deseada después de eliminar el conductor
+      navigate("/conductor");
     } catch (error) {
       console.log("error eliminando conductor", error);
     }
@@ -113,9 +117,11 @@ export default function ConductorPerfil() {
             </div>
 
             <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
-              <button class="text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                Editar
-              </button>
+              <Link to="/conductor/editar">
+                <button class="text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+                  Editar
+                </button>
+              </Link>
               <button
                 onClick={openModal}
                 class="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
@@ -133,6 +139,10 @@ export default function ConductorPerfil() {
           <div class="mt-20 text-center border-b pb-12">
             <h1 class="text-4xl font-medium text-gray-700">
               {conductor.nombre} {conductor.apellido}{" "}
+              <span class="font-light text-gray-500"></span>
+            </h1>
+            <h1 class="text-2xl font-small text-gray-700">
+              ID: #{conductor.id}
               <span class="font-light text-gray-500"></span>
             </h1>
             <br></br>
@@ -180,6 +190,11 @@ export default function ConductorPerfil() {
               </table>
             </div>
           </div>
+          <ModalDelete
+            isOpen={isOpen}
+            closeModal={closeModal}
+            confirmarEliminar={eliminarConductor}
+          />
         </div>
       </div>
     </main>

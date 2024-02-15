@@ -113,7 +113,7 @@ export default function RealTimeMap() {
   }, []);
 
   useInterval(() => {
-    //getDevicePosition();
+    getDevicePosition();
   }, 10000);
 
   const getDevicePosition = () => {

@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 import { listIncidencias } from "../graphql/queries";
 import { onCreateIncidencia } from "../graphql/subscriptions";
 import { ToastContainer, toast } from "react-toastify";
-
 import Spinner from "../components/Spinner";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
@@ -37,11 +36,14 @@ export default function Incidencia() {
   const [incidenciasDia, setIncidenciasDia] = useState(0);
   const [cantidadIncidencias, setCantidadIncidencias] = useState(0);
   const [fechas, setFechas] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   const notify = () => toast("Nueva incidencia registrada");
 
   const fetchIncidencias = async () => {
     try {
+      setIsLoading(true);
       const incidenciaData = await API.graphql(
         graphqlOperation(listIncidencias)
       );
@@ -50,6 +52,8 @@ export default function Incidencia() {
       setIncidencias(incidenciaInfo);
     } catch (error) {
       console.log("error leyendo datos", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -75,6 +79,23 @@ export default function Incidencia() {
     } catch (error) {
       console.error(error);
     }
+  };
+  const handleSubscription = () => {
+    subscriptionOnCreateIncidencia = API.graphql(
+      graphqlOperation(onCreateIncidencia)
+    ).subscribe({
+      next: (eventData) => {
+        const nuevaIncidencia = eventData.value.data.onCreateIncidencia;
+        setNuevaIncidencia(nuevaIncidencia);
+        notify();
+        // Actualizar la lista de incidencias con la nueva incidencia
+        setIncidencias((prevIncidencias) => [
+          nuevaIncidencia,
+          ...prevIncidencias,
+        ]);
+        setShowPopup(true);
+      },
+    });
   };
 
   const obtenerIncidenciasSemana = async () => {
@@ -200,16 +221,6 @@ export default function Incidencia() {
 
   let subscriptionOnCreateIncidencia;
   const resultadoSemana = obtenerIncidenciasSemana();
-  function handleSubscription() {
-    subscriptionOnCreateIncidencia = API.graphql(
-      graphqlOperation(onCreateIncidencia)
-    ).subscribe({
-      next: (eventData) => {
-        setNuevaIncidencia(eventData);
-        notify();
-      },
-    });
-  }
 
   useEffect(() => {
     handleSubscription();
@@ -396,6 +407,27 @@ export default function Incidencia() {
               </div>
             </div>
           </div>
+
+          {/* Agrega JSX para mostrar el popup */}
+          {showPopup && (
+            <div
+              id="toast-default"
+              className="flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+              role="alert"
+            >
+              {/* Contenido del popup */}
+              {/* ... (contenido del popup, igual que en tu ejemplo) */}
+              <button
+                type="button"
+                className="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+                onClick={() => setShowPopup(false)} // Oculta el popup al hacer clic en el botón de cerrar
+                aria-label="Close"
+              >
+                {/* Icono de cierre del popup */}
+                {/* ... (icono de cierre, igual que en tu ejemplo) */}
+              </button>
+            </div>
+          )}
 
           <ToastContainer />
         </main>
